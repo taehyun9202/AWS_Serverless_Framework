@@ -1,0 +1,34 @@
+service: myserverlessproject
+
+frameworkVersion: "2"
+
+provider:
+  name: aws
+  runtime: nodejs12.x
+  profile: serverlessUser
+  endpointType: regional
+  lambdaHashingVersion: 20201221
+
+plugins:
+  - serverless-s3-sync
+
+custom:
+  s3Sync:
+    - bucketName: taehyun-serverless-upload-bucket
+      localDir: uploadData
+
+functions:
+  getUser:
+    handler: lambdas/getUser.handler
+    events:
+      - http:
+          path: get-user/{ID}
+          method: GET
+          cors: true
+
+resources:
+  Resources:
+    DemoBucketUpload:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: taehyun-serverless-upload-bucket
