@@ -9,9 +9,23 @@
       "runtime": "nodejs12.x",
       "profile": "serverlessUser",
       "endpointType": "regional",
+      "region": "us-east-1",
+      "environment": {
+        "tableName": "player-points",
+        "bucketName": "taehyun-serverless-upload-bucket"
+      },
+      "iamRoleStatements": [
+        {
+          "Effect": "Allow",
+          "Action": [
+            "dynamodb:*",
+            "s3:*"
+          ],
+          "Resource": "*"
+        }
+      ],
       "lambdaHashingVersion": "20201221",
       "stage": "dev",
-      "region": "us-east-1",
       "versionFunctions": true,
       "compiledCloudFormationTemplate": {
         "AWSTemplateFormatVersion": "2010-09-09",
@@ -92,6 +106,30 @@
               "LogGroupName": "/aws/lambda/myserverlessproject-dev-getUser"
             }
           },
+          "GetPlayerScoreLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/myserverlessproject-dev-getPlayerScore"
+            }
+          },
+          "PutPlayerScoreLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/myserverlessproject-dev-putPlayerScore"
+            }
+          },
+          "CreateFileLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/myserverlessproject-dev-createFile"
+            }
+          },
+          "GetFileLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/myserverlessproject-dev-getFile"
+            }
+          },
           "IamRoleLambdaExecution": {
             "Type": "AWS::IAM::Role",
             "Properties": {
@@ -148,6 +186,9 @@
                             "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/myserverlessproject-dev*:*:*"
                           }
                         ]
+                      },
+                      {
+                        "$ref": "$[\"service\"][\"provider\"][\"iamRoleStatements\"][0]"
                       }
                     ]
                   }
@@ -176,13 +217,19 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628524061076-2021-08-09T15:47:41.076Z/myserverlessproject.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628550596885-2021-08-09T23:09:56.885Z/getUser.zip"
               },
-              "Handler": "lambdas/getUser.handler",
+              "Handler": "lambdas/endpoints/getUser.handler",
               "Runtime": "nodejs12.x",
               "FunctionName": "myserverlessproject-dev-getUser",
               "MemorySize": 1024,
               "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "tableName": "player-points",
+                  "bucketName": "taehyun-serverless-upload-bucket"
+                }
+              },
               "Role": {
                 "Fn::GetAtt": [
                   "IamRoleLambdaExecution",
@@ -194,14 +241,178 @@
               "GetUserLogGroup"
             ]
           },
-          "GetUserLambdaVersion7Gf1OgdchJ2NBCHkZg2lFYHm2InpodKNVA2Ek": {
+          "GetPlayerScoreLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/myserverlessproject/dev/1628550596885-2021-08-09T23:09:56.885Z/getPlayerScore.zip"
+              },
+              "Handler": "lambdas/endpoints/getPlayerScore.handler",
+              "Runtime": "nodejs12.x",
+              "FunctionName": "myserverlessproject-dev-getPlayerScore",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "tableName": "player-points",
+                  "bucketName": "taehyun-serverless-upload-bucket"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetPlayerScoreLogGroup"
+            ]
+          },
+          "PutPlayerScoreLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/myserverlessproject/dev/1628550596885-2021-08-09T23:09:56.885Z/putPlayerScore.zip"
+              },
+              "Handler": "lambdas/endpoints/putPlayerScore.handler",
+              "Runtime": "nodejs12.x",
+              "FunctionName": "myserverlessproject-dev-putPlayerScore",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "tableName": "player-points",
+                  "bucketName": "taehyun-serverless-upload-bucket"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "PutPlayerScoreLogGroup"
+            ]
+          },
+          "CreateFileLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/myserverlessproject/dev/1628550596885-2021-08-09T23:09:56.885Z/createFile.zip"
+              },
+              "Handler": "lambdas/endpoints/createFile.handler",
+              "Runtime": "nodejs12.x",
+              "FunctionName": "myserverlessproject-dev-createFile",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "tableName": "player-points",
+                  "bucketName": "taehyun-serverless-upload-bucket"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "CreateFileLogGroup"
+            ]
+          },
+          "GetFileLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/myserverlessproject/dev/1628550596885-2021-08-09T23:09:56.885Z/getFile.zip"
+              },
+              "Handler": "lambdas/endpoints/getFile.handler",
+              "Runtime": "nodejs12.x",
+              "FunctionName": "myserverlessproject-dev-getFile",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "tableName": "player-points",
+                  "bucketName": "taehyun-serverless-upload-bucket"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetFileLogGroup"
+            ]
+          },
+          "GetUserLambdaVersionmPnY7uisaBV4DR82c0K3chOpfanse1uiJD05HwZII": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetUserLambdaFunction"
               },
-              "CodeSha256": "d+HBom6hDSAvPLe1P+WSM37UKjSCnVEKXf7lrycNf/w="
+              "CodeSha256": "pjErCVxoY204zIBg4CzawKAli78TTEbbIZMs/AaERTs="
+            }
+          },
+          "GetPlayerScoreLambdaVersioniEFBi7U5P1ulto02Hg2gqeqAu5l5eeX4VxAWeJ7CMU": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetPlayerScoreLambdaFunction"
+              },
+              "CodeSha256": "58elO0ck8CUKb1lRk4+AaF6zzN4hAIKvzlX9X3xw9lE="
+            }
+          },
+          "PutPlayerScoreLambdaVersionDjIBzMvdKXEV0NX0oNsN1k7YvN2mO3A9oEsvVq1XiC8": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "PutPlayerScoreLambdaFunction"
+              },
+              "CodeSha256": "JK6fZWk7yAjYNX/WO+CDX8yeTyM8qmXgL5D2n2FofNQ="
+            }
+          },
+          "CreateFileLambdaVersionoBQSBNzRJBRvs1r98kBG1fPvjQnHmemdAzGQCCY": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "CreateFileLambdaFunction"
+              },
+              "CodeSha256": "4PA7Wf1re8vg40ngjojcg+2Xo34oUOBZ5c6nCmRChlY="
+            }
+          },
+          "GetFileLambdaVersionSHXnyY2fApVd5U1QQtbMYns3EOSl3gyQDjiphuZA65s": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetFileLambdaFunction"
+              },
+              "CodeSha256": "u0Xgr1d4wqz9F+C2s0/wGvL27F4bkLpXgJ5n0xqzzB0="
             }
           },
           "ApiGatewayRestApi": {
@@ -238,6 +449,114 @@
                 "Ref": "ApiGatewayResourceGetDashuser"
               },
               "PathPart": "{ID}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceGetDashplayerDashscore": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "get-player-score",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceGetDashplayerDashscoreIdVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceGetDashplayerDashscore"
+              },
+              "PathPart": "{ID}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourcePutDashplayerDashscore": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "put-player-score",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourcePutDashplayerDashscoreIdVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourcePutDashplayerDashscore"
+              },
+              "PathPart": "{ID}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceCreateDashfile": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "create-file",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceCreateDashfileFilenameVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceCreateDashfile"
+              },
+              "PathPart": "{fileName}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceGetDashfile": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "get-file",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceGetDashfileFilenameVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceGetDashfile"
+              },
+              "PathPart": "{fileName}",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -282,6 +601,186 @@
               },
               "ResourceId": {
                 "Ref": "ApiGatewayResourceGetDashuserIdVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodGetDashplayerDashscoreIdVarOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceGetDashplayerDashscoreIdVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodPutDashplayerDashscoreIdVarOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourcePutDashplayerDashscoreIdVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodCreateDashfileFilenameVarOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceCreateDashfileFilenameVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodGetDashfileFilenameVarOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceGetDashfileFilenameVar"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -334,7 +833,191 @@
               "GetUserLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1628524057435": {
+          "ApiGatewayMethodGetDashplayerDashscoreIdVarGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceGetDashplayerDashscoreIdVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "GetPlayerScoreLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "GetPlayerScoreLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodPutDashplayerDashscoreIdVarPost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourcePutDashplayerDashscoreIdVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "PutPlayerScoreLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "PutPlayerScoreLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodCreateDashfileFilenameVarPost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceCreateDashfileFilenameVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "CreateFileLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "CreateFileLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodGetDashfileFilenameVarGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceGetDashfileFilenameVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "GetFileLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "GetFileLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayDeployment1628550585838": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -344,7 +1027,15 @@
             },
             "DependsOn": [
               "ApiGatewayMethodGetDashuserIdVarOptions",
-              "ApiGatewayMethodGetDashuserIdVarGet"
+              "ApiGatewayMethodGetDashplayerDashscoreIdVarOptions",
+              "ApiGatewayMethodPutDashplayerDashscoreIdVarOptions",
+              "ApiGatewayMethodCreateDashfileFilenameVarOptions",
+              "ApiGatewayMethodGetDashfileFilenameVarOptions",
+              "ApiGatewayMethodGetDashuserIdVarGet",
+              "ApiGatewayMethodGetDashplayerDashscoreIdVarGet",
+              "ApiGatewayMethodPutDashplayerDashscoreIdVarPost",
+              "ApiGatewayMethodCreateDashfileFilenameVarPost",
+              "ApiGatewayMethodGetDashfileFilenameVarGet"
             ]
           },
           "GetUserLambdaPermissionApiGateway": {
@@ -384,10 +1075,177 @@
               }
             }
           },
+          "GetPlayerScoreLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetPlayerScoreLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "PutPlayerScoreLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "PutPlayerScoreLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "CreateFileLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "CreateFileLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "GetFileLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetFileLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
           "DemoBucketUpload": {
             "Type": "AWS::S3::Bucket",
             "Properties": {
               "BucketName": "taehyun-serverless-upload-bucket"
+            }
+          },
+          "MyDynamoDBTable": {
+            "Type": "AWS::DynamoDB::Table",
+            "Properties": {
+              "TableName": "player-points",
+              "AttributeDefinitions": [
+                {
+                  "AttributeName": "ID",
+                  "AttributeType": "S"
+                }
+              ],
+              "KeySchema": [
+                {
+                  "AttributeName": "ID",
+                  "KeyType": "HASH"
+                }
+              ],
+              "BillingMode": "PAY_PER_REQUEST"
             }
           }
         },
@@ -403,10 +1261,46 @@
           "GetUserLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetUserLambdaVersion7Gf1OgdchJ2NBCHkZg2lFYHm2InpodKNVA2Ek"
+              "Ref": "GetUserLambdaVersionmPnY7uisaBV4DR82c0K3chOpfanse1uiJD05HwZII"
             },
             "Export": {
               "Name": "sls-myserverlessproject-dev-GetUserLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetPlayerScoreLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetPlayerScoreLambdaVersioniEFBi7U5P1ulto02Hg2gqeqAu5l5eeX4VxAWeJ7CMU"
+            },
+            "Export": {
+              "Name": "sls-myserverlessproject-dev-GetPlayerScoreLambdaFunctionQualifiedArn"
+            }
+          },
+          "PutPlayerScoreLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "PutPlayerScoreLambdaVersionDjIBzMvdKXEV0NX0oNsN1k7YvN2mO3A9oEsvVq1XiC8"
+            },
+            "Export": {
+              "Name": "sls-myserverlessproject-dev-PutPlayerScoreLambdaFunctionQualifiedArn"
+            }
+          },
+          "CreateFileLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "CreateFileLambdaVersionoBQSBNzRJBRvs1r98kBG1fPvjQnHmemdAzGQCCY"
+            },
+            "Export": {
+              "Name": "sls-myserverlessproject-dev-CreateFileLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetFileLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetFileLambdaVersionSHXnyY2fApVd5U1QQtbMYns3EOSl3gyQDjiphuZA65s"
+            },
+            "Export": {
+              "Name": "sls-myserverlessproject-dev-GetFileLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -522,6 +1416,8 @@
       "vpc": {}
     },
     "custom": {
+      "tableName": "player-points",
+      "bucketName": "taehyun-serverless-upload-bucket",
       "s3Sync": [
         {
           "bucketName": "taehyun-serverless-upload-bucket",
@@ -530,12 +1426,13 @@
       ]
     },
     "plugins": [
-      "serverless-s3-sync"
+      "serverless-s3-sync",
+      "serverless-webpack"
     ],
     "pluginsData": {},
     "functions": {
       "getUser": {
-        "handler": "lambdas/getUser.handler",
+        "handler": "lambdas/endpoints/getUser.handler",
         "events": [
           {
             "http": {
@@ -565,12 +1462,174 @@
           }
         ],
         "name": "myserverlessproject-dev-getUser",
-        "package": {},
+        "package": {
+          "artifact": ".serverless\\getUser.zip"
+        },
         "memory": 1024,
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "GetUserLambdaVersion7Gf1OgdchJ2NBCHkZg2lFYHm2InpodKNVA2Ek"
+        "versionLogicalId": "GetUserLambdaVersionmPnY7uisaBV4DR82c0K3chOpfanse1uiJD05HwZII"
+      },
+      "getPlayerScore": {
+        "handler": "lambdas/endpoints/getPlayerScore.handler",
+        "events": [
+          {
+            "http": {
+              "path": "get-player-score/{ID}",
+              "method": "get",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "myserverlessproject-dev-getPlayerScore",
+        "package": {
+          "artifact": ".serverless\\getPlayerScore.zip"
+        },
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs12.x",
+        "vpc": {},
+        "versionLogicalId": "GetPlayerScoreLambdaVersioniEFBi7U5P1ulto02Hg2gqeqAu5l5eeX4VxAWeJ7CMU"
+      },
+      "putPlayerScore": {
+        "handler": "lambdas/endpoints/putPlayerScore.handler",
+        "events": [
+          {
+            "http": {
+              "path": "put-player-score/{ID}",
+              "method": "post",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "POST"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "myserverlessproject-dev-putPlayerScore",
+        "package": {
+          "artifact": ".serverless\\putPlayerScore.zip"
+        },
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs12.x",
+        "vpc": {},
+        "versionLogicalId": "PutPlayerScoreLambdaVersionDjIBzMvdKXEV0NX0oNsN1k7YvN2mO3A9oEsvVq1XiC8"
+      },
+      "createFile": {
+        "handler": "lambdas/endpoints/createFile.handler",
+        "events": [
+          {
+            "http": {
+              "path": "create-file/{fileName}",
+              "method": "post",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "POST"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "myserverlessproject-dev-createFile",
+        "package": {
+          "artifact": ".serverless\\createFile.zip"
+        },
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs12.x",
+        "vpc": {},
+        "versionLogicalId": "CreateFileLambdaVersionoBQSBNzRJBRvs1r98kBG1fPvjQnHmemdAzGQCCY"
+      },
+      "getFile": {
+        "handler": "lambdas/endpoints/getFile.handler",
+        "events": [
+          {
+            "http": {
+              "path": "get-file/{fileName}",
+              "method": "get",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "myserverlessproject-dev-getFile",
+        "package": {
+          "artifact": ".serverless\\getFile.zip"
+        },
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs12.x",
+        "vpc": {},
+        "versionLogicalId": "GetFileLambdaVersionSHXnyY2fApVd5U1QQtbMYns3EOSl3gyQDjiphuZA65s"
       }
     },
     "resources": {
@@ -579,6 +1638,25 @@
           "Type": "AWS::S3::Bucket",
           "Properties": {
             "BucketName": "taehyun-serverless-upload-bucket"
+          }
+        },
+        "MyDynamoDBTable": {
+          "Type": "AWS::DynamoDB::Table",
+          "Properties": {
+            "TableName": "player-points",
+            "AttributeDefinitions": [
+              {
+                "AttributeName": "ID",
+                "AttributeType": "S"
+              }
+            ],
+            "KeySchema": [
+              {
+                "AttributeName": "ID",
+                "KeyType": "HASH"
+              }
+            ],
+            "BillingMode": "PAY_PER_REQUEST"
           }
         }
       },
@@ -597,6 +1675,10 @@
       "plugins": {
         "$ref": "$[\"service\"][\"plugins\"]"
       },
+      "package": {
+        "individually": true,
+        "artifactDirectoryName": "serverless/myserverlessproject/dev/1628550596885-2021-08-09T23:09:56.885Z"
+      },
       "custom": {
         "$ref": "$[\"service\"][\"custom\"]"
       },
@@ -608,11 +1690,11 @@
       }
     },
     "layers": {},
-    "isDashboardMonitoringPreconfigured": false,
-    "artifact": "D:\\coding\\myServerlessProject\\.serverless\\myserverlessproject.zip"
+    "isDashboardMonitoringPreconfigured": false
   },
   "package": {
-    "artifactDirectoryName": "serverless/myserverlessproject/dev/1628524061076-2021-08-09T15:47:41.076Z",
-    "artifact": "myserverlessproject.zip"
+    "individually": true,
+    "artifactDirectoryName": "serverless/myserverlessproject/dev/1628550596885-2021-08-09T23:09:56.885Z",
+    "artifact": ""
   }
 }
