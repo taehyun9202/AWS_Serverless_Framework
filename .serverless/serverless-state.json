@@ -165,6 +165,12 @@
               "LogGroupName": "/aws/lambda/myserverlessproject-dev-putPlayerScore"
             }
           },
+          "UpdatePlayerScoreLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/myserverlessproject-dev-updatePlayerScore"
+            }
+          },
           "CreateFileLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
@@ -175,6 +181,12 @@
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
               "LogGroupName": "/aws/lambda/myserverlessproject-dev-getFile"
+            }
+          },
+          "GetGameScoresLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/myserverlessproject-dev-getGameScores"
             }
           },
           "SendEmailLogGroup": {
@@ -276,7 +288,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628557873638-2021-08-10T01:11:13.638Z/proxy.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z/proxy.zip"
               },
               "Handler": "lambdas/endpoints/proxy.handler",
               "Runtime": "nodejs12.x",
@@ -307,7 +319,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628557873638-2021-08-10T01:11:13.638Z/getUser.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z/getUser.zip"
               },
               "Handler": "lambdas/endpoints/getUser.handler",
               "Runtime": "nodejs12.x",
@@ -338,7 +350,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628557873638-2021-08-10T01:11:13.638Z/getPlayerScore.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z/getPlayerScore.zip"
               },
               "Handler": "lambdas/endpoints/getPlayerScore.handler",
               "Runtime": "nodejs12.x",
@@ -369,7 +381,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628557873638-2021-08-10T01:11:13.638Z/putPlayerScore.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z/putPlayerScore.zip"
               },
               "Handler": "lambdas/endpoints/putPlayerScore.handler",
               "Runtime": "nodejs12.x",
@@ -393,6 +405,37 @@
               "PutPlayerScoreLogGroup"
             ]
           },
+          "UpdatePlayerScoreLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z/updatePlayerScore.zip"
+              },
+              "Handler": "lambdas/endpoints/updatePlayerScore.handler",
+              "Runtime": "nodejs12.x",
+              "FunctionName": "myserverlessproject-dev-updatePlayerScore",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "tableName": "player-points",
+                  "bucketName": "taehyun-serverless-upload-bucket"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "UpdatePlayerScoreLogGroup"
+            ]
+          },
           "CreateFileLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
@@ -400,7 +443,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628557873638-2021-08-10T01:11:13.638Z/createFile.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z/createFile.zip"
               },
               "Handler": "lambdas/endpoints/createFile.handler",
               "Runtime": "nodejs12.x",
@@ -431,7 +474,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628557873638-2021-08-10T01:11:13.638Z/getFile.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z/getFile.zip"
               },
               "Handler": "lambdas/endpoints/getFile.handler",
               "Runtime": "nodejs12.x",
@@ -455,6 +498,37 @@
               "GetFileLogGroup"
             ]
           },
+          "GetGameScoresLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z/getGameScores.zip"
+              },
+              "Handler": "lambdas/endpoints/getGameScores.handler",
+              "Runtime": "nodejs12.x",
+              "FunctionName": "myserverlessproject-dev-getGameScores",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "tableName": "player-points",
+                  "bucketName": "taehyun-serverless-upload-bucket"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "GetGameScoresLogGroup"
+            ]
+          },
           "SendEmailLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
@@ -462,7 +536,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628557873638-2021-08-10T01:11:13.638Z/sendEmail.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z/sendEmail.zip"
               },
               "Handler": "lambdas/endpoints/sendEmail.handler",
               "Runtime": "nodejs12.x",
@@ -493,7 +567,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628557873638-2021-08-10T01:11:13.638Z/sendText.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z/sendText.zip"
               },
               "Handler": "lambdas/endpoints/sendText.handler",
               "Runtime": "nodejs12.x",
@@ -517,84 +591,104 @@
               "SendTextLogGroup"
             ]
           },
-          "ProxyLambdaVersionIHWNQDSFTTu3oG5bXSg4FJ3wtWDfz76SNLw4v81PHI": {
+          "ProxyLambdaVersionQyFiZ3Y8XisplUANTDOSSjYGpg2Gd3bGLNOwB8GeQ0": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ProxyLambdaFunction"
               },
-              "CodeSha256": "KgGrQ9UqNGDhoQeVXJzB7UaSRbX+nQiFAhcbDFIR1Sg="
+              "CodeSha256": "hfUJ/ysHrmON6Y/s5rrNShTNPHJpwdHhKJI36u2PkWM="
             }
           },
-          "GetUserLambdaVersion7zx6xmHgJxZfCba9lPZcxrnltXDvGU8SrU4FzLWVP0": {
+          "GetUserLambdaVersionwVKT56WMRmlJyfmXm7DesSKfGgD8g8DddgNXYbhfvM": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetUserLambdaFunction"
               },
-              "CodeSha256": "xthG1T4SMjD30vnqxhyAVBrAQC4Nv7F8uukMZHpEg8Q="
+              "CodeSha256": "dzwXXO8RABVGkDRkCZCqPMZE63jsHvrb7v1KOBnb5cQ="
             }
           },
-          "GetPlayerScoreLambdaVersionoy8ibDa9DTItKSpmxThe0M9ZJl7SDMYKfUMkkL4Zo": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "GetPlayerScoreLambdaFunction"
-              },
-              "CodeSha256": "FDqNvfNhBzPix9ayAT0oj1qGow977Yg3Kii449QDthI="
-            }
-          },
-          "CreateFileLambdaVersionvAmvG52OXOrrMIAfaLo4VwhNIunoFRH9JKhoWW2Q": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "CreateFileLambdaFunction"
-              },
-              "CodeSha256": "mRi7FQclBdtSBtPzXIoORxKkaHlPuC6rBiOMcLRsZo4="
-            }
-          },
-          "GetFileLambdaVersionXY1l4eJ1OUGyFzbQPqbGAsBoAKlzchdrMF7Hnkax8o": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "GetFileLambdaFunction"
-              },
-              "CodeSha256": "r7ZedfUgZ25MvUez/Q6Iu94YJxdIw+i2/QAoz2rS0yo="
-            }
-          },
-          "SendEmailLambdaVersionBpWs6c7OVKNQaPOCno9AbhwAFSGL9jJXA1TFqDfvzys": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "SendEmailLambdaFunction"
-              },
-              "CodeSha256": "1bBe6RQgmFxdRA2yUUMkMfUH9NbWKkLvWQvMG9dL7Fw="
-            }
-          },
-          "SendTextLambdaVersion78IYh4QtrUfhWE9tCQPE8LaKPURUVX3sxLjlh7Ek4jA": {
+          "SendTextLambdaVersionayvsz20RhucXEwI8hXUEaWezMgR9hHdSt12LbebL28": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "SendTextLambdaFunction"
               },
-              "CodeSha256": "tycCNmmCfNSk0/1Ati+TnxKr27RYg/HHX20mUGaXXnQ="
+              "CodeSha256": "WtU9gueN/NORG2smvdbldNnY83Obuae5ev4xhzxReCM="
             }
           },
-          "PutPlayerScoreLambdaVersionYbjmNaPyt7Waeijra4G1Vr35mkIhkCCWPy4xo7fPM": {
+          "SendEmailLambdaVersion44XOPiAB7MEQxcqt7ZhXIMQNsE4iFavI6RbrOnV3QI": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "SendEmailLambdaFunction"
+              },
+              "CodeSha256": "LgB9i2uR3y0ONWly021Y3iVsFSzfsQrj4gZPI38Djpo="
+            }
+          },
+          "CreateFileLambdaVersionp1fLjBf5wrQ1NEWDk4fnfc9UERDjCXPsHqB2egxxNM": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "CreateFileLambdaFunction"
+              },
+              "CodeSha256": "cl47lxfCP4jV9dvAxK+jaR21gKhUpgDzSUqk9yJh0qI="
+            }
+          },
+          "GetGameScoresLambdaVersionq6K6uVGX2IOwooC58nNRwcbYnDS27In9W4gN6yNM": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetGameScoresLambdaFunction"
+              },
+              "CodeSha256": "3OcGlw6ladu8sAXD/H/lnEDNmpCXk9BT+HzoOPywnho="
+            }
+          },
+          "GetFileLambdaVersionCN0vuqbyahdU2Uon2amTm67bcDskrPQuuWfpnWP0Sw": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetFileLambdaFunction"
+              },
+              "CodeSha256": "gRxweICo5VV/9ysoe700KV0Ojl/+dl+c27GznSdQ1WM="
+            }
+          },
+          "GetPlayerScoreLambdaVersionLCCU8BRC41CmCHGnkcBB5p0lPzpidtprfzR3jPLAIA": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetPlayerScoreLambdaFunction"
+              },
+              "CodeSha256": "PwDGB+bMfPGLqBKLMbO9TLT8J3lxfRbmRGAIYpAm+Pk="
+            }
+          },
+          "UpdatePlayerScoreLambdaVersionn9u7LASS9U4Gd0Gl1kgCWnZEo3n0FBTbiAlRhjXsIsE": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "UpdatePlayerScoreLambdaFunction"
+              },
+              "CodeSha256": "czRafBYAYbr2iRv8tUDyZgzN38QmCa5zHfyQub8ri4I="
+            }
+          },
+          "PutPlayerScoreLambdaVersionsiebxfd9CyqrlP7dHAGER4jj3EvUFDR0NQ4THfPqo": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "PutPlayerScoreLambdaFunction"
               },
-              "CodeSha256": "8wv94CzE1GPWpD4vDVPsLGdWYSu2uNCzPAg77poZU1w="
+              "CodeSha256": "yz2rI4XGX5saXSIbMB6PK1+gkclN/cdE8L7uw/R/mv4="
             }
           },
           "ApiGatewayRestApi": {
@@ -717,6 +811,33 @@
               }
             }
           },
+          "ApiGatewayResourceUpdateDashplayerDashscore": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "update-player-score",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceUpdateDashplayerDashscoreIdVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceUpdateDashplayerDashscore"
+              },
+              "PathPart": "{ID}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
           "ApiGatewayResourceCreateDashfile": {
             "Type": "AWS::ApiGateway::Resource",
             "Properties": {
@@ -766,6 +887,33 @@
                 "Ref": "ApiGatewayResourceGetDashfile"
               },
               "PathPart": "{fileName}",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceGetDashgameDashscores": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "get-game-scores",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceGetDashgameDashscoresGameVar": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Ref": "ApiGatewayResourceGetDashgameDashscores"
+              },
+              "PathPart": "{game}",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -936,6 +1084,51 @@
               }
             }
           },
+          "ApiGatewayMethodUpdateDashplayerDashscoreIdVarOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,PUT'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceUpdateDashplayerDashscoreIdVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
           "ApiGatewayMethodCreateDashfileFilenameVarOptions": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
@@ -1020,6 +1213,51 @@
               },
               "ResourceId": {
                 "Ref": "ApiGatewayResourceGetDashfileFilenameVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodGetDashgameDashscoresGameVarOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,GET'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceGetDashgameDashscoresGameVar"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -1286,6 +1524,52 @@
               "PutPlayerScoreLambdaPermissionApiGateway"
             ]
           },
+          "ApiGatewayMethodUpdateDashplayerDashscoreIdVarPut": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "PUT",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceUpdateDashplayerDashscoreIdVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "UpdatePlayerScoreLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "UpdatePlayerScoreLambdaPermissionApiGateway"
+            ]
+          },
           "ApiGatewayMethodCreateDashfileFilenameVarPost": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
@@ -1376,6 +1660,52 @@
             },
             "DependsOn": [
               "GetFileLambdaPermissionApiGateway"
+            ]
+          },
+          "ApiGatewayMethodGetDashgameDashscoresGameVarGet": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "GET",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceGetDashgameDashscoresGameVar"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "GetGameScoresLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "GetGameScoresLambdaPermissionApiGateway"
             ]
           },
           "ApiGatewayMethodSendDashemailPost": {
@@ -1481,7 +1811,7 @@
               "Name": "myserverlessproject-dev | Validate request body and querystring parameters"
             }
           },
-          "ApiGatewayDeployment1628557858431": {
+          "ApiGatewayDeployment1628623246729": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -1493,16 +1823,20 @@
               "ApiGatewayMethodGetDashuserIdVarOptions",
               "ApiGatewayMethodGetDashplayerDashscoreIdVarOptions",
               "ApiGatewayMethodPutDashplayerDashscoreIdVarOptions",
+              "ApiGatewayMethodUpdateDashplayerDashscoreIdVarOptions",
               "ApiGatewayMethodCreateDashfileFilenameVarOptions",
               "ApiGatewayMethodGetDashfileFilenameVarOptions",
+              "ApiGatewayMethodGetDashgameDashscoresGameVarOptions",
               "ApiGatewayMethodSendDashemailOptions",
               "ApiGatewayMethodSendDashtextOptions",
               "ApiGatewayMethodChuckDashnorrisProxyVarAny",
               "ApiGatewayMethodGetDashuserIdVarGet",
               "ApiGatewayMethodGetDashplayerDashscoreIdVarGet",
               "ApiGatewayMethodPutDashplayerDashscoreIdVarPost",
+              "ApiGatewayMethodUpdateDashplayerDashscoreIdVarPut",
               "ApiGatewayMethodCreateDashfileFilenameVarPost",
               "ApiGatewayMethodGetDashfileFilenameVarGet",
+              "ApiGatewayMethodGetDashgameDashscoresGameVarGet",
               "ApiGatewayMethodSendDashemailPost",
               "ApiGatewayMethodSendDashtextPost"
             ]
@@ -1521,7 +1855,7 @@
                 }
               ]
             },
-            "DependsOn": "ApiGatewayDeployment1628557858431"
+            "DependsOn": "ApiGatewayDeployment1628623246729"
           },
           "ApiGatewayApiKeyPaid1": {
             "Type": "AWS::ApiGateway::ApiKey",
@@ -1537,11 +1871,11 @@
                 }
               ]
             },
-            "DependsOn": "ApiGatewayDeployment1628557858431"
+            "DependsOn": "ApiGatewayDeployment1628623246729"
           },
           "ApiGatewayUsagePlanFree": {
             "Type": "AWS::ApiGateway::UsagePlan",
-            "DependsOn": "ApiGatewayDeployment1628557858431",
+            "DependsOn": "ApiGatewayDeployment1628623246729",
             "Properties": {
               "ApiStages": [
                 {
@@ -1565,7 +1899,7 @@
           },
           "ApiGatewayUsagePlanPaid": {
             "Type": "AWS::ApiGateway::UsagePlan",
-            "DependsOn": "ApiGatewayDeployment1628557858431",
+            "DependsOn": "ApiGatewayDeployment1628623246729",
             "Properties": {
               "ApiStages": [
                 {
@@ -1759,6 +2093,43 @@
               }
             }
           },
+          "UpdatePlayerScoreLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "UpdatePlayerScoreLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
           "CreateFileLambdaPermissionApiGateway": {
             "Type": "AWS::Lambda::Permission",
             "Properties": {
@@ -1802,6 +2173,43 @@
               "FunctionName": {
                 "Fn::GetAtt": [
                   "GetFileLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
+          "GetGameScoresLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "GetGameScoresLambdaFunction",
                   "Arn"
                 ]
               },
@@ -1921,12 +2329,30 @@
                 {
                   "AttributeName": "ID",
                   "AttributeType": "S"
+                },
+                {
+                  "AttributeName": "game",
+                  "AttributeType": "S"
                 }
               ],
               "KeySchema": [
                 {
                   "AttributeName": "ID",
                   "KeyType": "HASH"
+                }
+              ],
+              "GlobalSecondaryIndexes": [
+                {
+                  "IndexName": "game-index",
+                  "KeySchema": [
+                    {
+                      "AttributeName": "game",
+                      "KeyType": "HASH"
+                    }
+                  ],
+                  "Projection": {
+                    "ProjectionType": "ALL"
+                  }
                 }
               ],
               "BillingMode": "PAY_PER_REQUEST"
@@ -1945,7 +2371,7 @@
           "ProxyLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ProxyLambdaVersionIHWNQDSFTTu3oG5bXSg4FJ3wtWDfz76SNLw4v81PHI"
+              "Ref": "ProxyLambdaVersionQyFiZ3Y8XisplUANTDOSSjYGpg2Gd3bGLNOwB8GeQ0"
             },
             "Export": {
               "Name": "sls-myserverlessproject-dev-ProxyLambdaFunctionQualifiedArn"
@@ -1954,61 +2380,79 @@
           "GetUserLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetUserLambdaVersion7zx6xmHgJxZfCba9lPZcxrnltXDvGU8SrU4FzLWVP0"
+              "Ref": "GetUserLambdaVersionwVKT56WMRmlJyfmXm7DesSKfGgD8g8DddgNXYbhfvM"
             },
             "Export": {
               "Name": "sls-myserverlessproject-dev-GetUserLambdaFunctionQualifiedArn"
             }
           },
-          "GetPlayerScoreLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "GetPlayerScoreLambdaVersionoy8ibDa9DTItKSpmxThe0M9ZJl7SDMYKfUMkkL4Zo"
-            },
-            "Export": {
-              "Name": "sls-myserverlessproject-dev-GetPlayerScoreLambdaFunctionQualifiedArn"
-            }
-          },
-          "CreateFileLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "CreateFileLambdaVersionvAmvG52OXOrrMIAfaLo4VwhNIunoFRH9JKhoWW2Q"
-            },
-            "Export": {
-              "Name": "sls-myserverlessproject-dev-CreateFileLambdaFunctionQualifiedArn"
-            }
-          },
-          "GetFileLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "GetFileLambdaVersionXY1l4eJ1OUGyFzbQPqbGAsBoAKlzchdrMF7Hnkax8o"
-            },
-            "Export": {
-              "Name": "sls-myserverlessproject-dev-GetFileLambdaFunctionQualifiedArn"
-            }
-          },
-          "SendEmailLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "SendEmailLambdaVersionBpWs6c7OVKNQaPOCno9AbhwAFSGL9jJXA1TFqDfvzys"
-            },
-            "Export": {
-              "Name": "sls-myserverlessproject-dev-SendEmailLambdaFunctionQualifiedArn"
-            }
-          },
           "SendTextLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "SendTextLambdaVersion78IYh4QtrUfhWE9tCQPE8LaKPURUVX3sxLjlh7Ek4jA"
+              "Ref": "SendTextLambdaVersionayvsz20RhucXEwI8hXUEaWezMgR9hHdSt12LbebL28"
             },
             "Export": {
               "Name": "sls-myserverlessproject-dev-SendTextLambdaFunctionQualifiedArn"
             }
           },
+          "SendEmailLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "SendEmailLambdaVersion44XOPiAB7MEQxcqt7ZhXIMQNsE4iFavI6RbrOnV3QI"
+            },
+            "Export": {
+              "Name": "sls-myserverlessproject-dev-SendEmailLambdaFunctionQualifiedArn"
+            }
+          },
+          "CreateFileLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "CreateFileLambdaVersionp1fLjBf5wrQ1NEWDk4fnfc9UERDjCXPsHqB2egxxNM"
+            },
+            "Export": {
+              "Name": "sls-myserverlessproject-dev-CreateFileLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetGameScoresLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetGameScoresLambdaVersionq6K6uVGX2IOwooC58nNRwcbYnDS27In9W4gN6yNM"
+            },
+            "Export": {
+              "Name": "sls-myserverlessproject-dev-GetGameScoresLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetFileLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetFileLambdaVersionCN0vuqbyahdU2Uon2amTm67bcDskrPQuuWfpnWP0Sw"
+            },
+            "Export": {
+              "Name": "sls-myserverlessproject-dev-GetFileLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetPlayerScoreLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetPlayerScoreLambdaVersionLCCU8BRC41CmCHGnkcBB5p0lPzpidtprfzR3jPLAIA"
+            },
+            "Export": {
+              "Name": "sls-myserverlessproject-dev-GetPlayerScoreLambdaFunctionQualifiedArn"
+            }
+          },
+          "UpdatePlayerScoreLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "UpdatePlayerScoreLambdaVersionn9u7LASS9U4Gd0Gl1kgCWnZEo3n0FBTbiAlRhjXsIsE"
+            },
+            "Export": {
+              "Name": "sls-myserverlessproject-dev-UpdatePlayerScoreLambdaFunctionQualifiedArn"
+            }
+          },
           "PutPlayerScoreLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "PutPlayerScoreLambdaVersionYbjmNaPyt7Waeijra4G1Vr35mkIhkCCWPy4xo7fPM"
+              "Ref": "PutPlayerScoreLambdaVersionsiebxfd9CyqrlP7dHAGER4jj3EvUFDR0NQ4THfPqo"
             },
             "Export": {
               "Name": "sls-myserverlessproject-dev-PutPlayerScoreLambdaFunctionQualifiedArn"
@@ -2168,7 +2612,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "ProxyLambdaVersionIHWNQDSFTTu3oG5bXSg4FJ3wtWDfz76SNLw4v81PHI"
+        "versionLogicalId": "ProxyLambdaVersionQyFiZ3Y8XisplUANTDOSSjYGpg2Gd3bGLNOwB8GeQ0"
       },
       "getUser": {
         "handler": "lambdas/endpoints/getUser.handler",
@@ -2209,7 +2653,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "GetUserLambdaVersion7zx6xmHgJxZfCba9lPZcxrnltXDvGU8SrU4FzLWVP0"
+        "versionLogicalId": "GetUserLambdaVersionwVKT56WMRmlJyfmXm7DesSKfGgD8g8DddgNXYbhfvM"
       },
       "getPlayerScore": {
         "handler": "lambdas/endpoints/getPlayerScore.handler",
@@ -2249,7 +2693,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "GetPlayerScoreLambdaVersionoy8ibDa9DTItKSpmxThe0M9ZJl7SDMYKfUMkkL4Zo"
+        "versionLogicalId": "GetPlayerScoreLambdaVersionLCCU8BRC41CmCHGnkcBB5p0lPzpidtprfzR3jPLAIA"
       },
       "putPlayerScore": {
         "handler": "lambdas/endpoints/putPlayerScore.handler",
@@ -2289,7 +2733,47 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "PutPlayerScoreLambdaVersionYbjmNaPyt7Waeijra4G1Vr35mkIhkCCWPy4xo7fPM"
+        "versionLogicalId": "PutPlayerScoreLambdaVersionsiebxfd9CyqrlP7dHAGER4jj3EvUFDR0NQ4THfPqo"
+      },
+      "updatePlayerScore": {
+        "handler": "lambdas/endpoints/updatePlayerScore.handler",
+        "events": [
+          {
+            "http": {
+              "path": "update-player-score/{ID}",
+              "method": "put",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "PUT"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "myserverlessproject-dev-updatePlayerScore",
+        "package": {
+          "artifact": ".serverless\\updatePlayerScore.zip"
+        },
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs12.x",
+        "vpc": {},
+        "versionLogicalId": "UpdatePlayerScoreLambdaVersionn9u7LASS9U4Gd0Gl1kgCWnZEo3n0FBTbiAlRhjXsIsE"
       },
       "createFile": {
         "handler": "lambdas/endpoints/createFile.handler",
@@ -2329,7 +2813,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "CreateFileLambdaVersionvAmvG52OXOrrMIAfaLo4VwhNIunoFRH9JKhoWW2Q"
+        "versionLogicalId": "CreateFileLambdaVersionp1fLjBf5wrQ1NEWDk4fnfc9UERDjCXPsHqB2egxxNM"
       },
       "getFile": {
         "handler": "lambdas/endpoints/getFile.handler",
@@ -2369,7 +2853,47 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "GetFileLambdaVersionXY1l4eJ1OUGyFzbQPqbGAsBoAKlzchdrMF7Hnkax8o"
+        "versionLogicalId": "GetFileLambdaVersionCN0vuqbyahdU2Uon2amTm67bcDskrPQuuWfpnWP0Sw"
+      },
+      "getGameScores": {
+        "handler": "lambdas/endpoints/getGameScores.handler",
+        "events": [
+          {
+            "http": {
+              "path": "get-game-scores/{game}",
+              "method": "get",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "GET"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "myserverlessproject-dev-getGameScores",
+        "package": {
+          "artifact": ".serverless\\getGameScores.zip"
+        },
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs12.x",
+        "vpc": {},
+        "versionLogicalId": "GetGameScoresLambdaVersionq6K6uVGX2IOwooC58nNRwcbYnDS27In9W4gN6yNM"
       },
       "sendEmail": {
         "handler": "lambdas/endpoints/sendEmail.handler",
@@ -2409,7 +2933,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "SendEmailLambdaVersionBpWs6c7OVKNQaPOCno9AbhwAFSGL9jJXA1TFqDfvzys"
+        "versionLogicalId": "SendEmailLambdaVersion44XOPiAB7MEQxcqt7ZhXIMQNsE4iFavI6RbrOnV3QI"
       },
       "sendText": {
         "handler": "lambdas/endpoints/sendText.handler",
@@ -2449,7 +2973,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "SendTextLambdaVersion78IYh4QtrUfhWE9tCQPE8LaKPURUVX3sxLjlh7Ek4jA"
+        "versionLogicalId": "SendTextLambdaVersionayvsz20RhucXEwI8hXUEaWezMgR9hHdSt12LbebL28"
       }
     },
     "resources": {
@@ -2468,12 +2992,30 @@
               {
                 "AttributeName": "ID",
                 "AttributeType": "S"
+              },
+              {
+                "AttributeName": "game",
+                "AttributeType": "S"
               }
             ],
             "KeySchema": [
               {
                 "AttributeName": "ID",
                 "KeyType": "HASH"
+              }
+            ],
+            "GlobalSecondaryIndexes": [
+              {
+                "IndexName": "game-index",
+                "KeySchema": [
+                  {
+                    "AttributeName": "game",
+                    "KeyType": "HASH"
+                  }
+                ],
+                "Projection": {
+                  "ProjectionType": "ALL"
+                }
               }
             ],
             "BillingMode": "PAY_PER_REQUEST"
@@ -2497,7 +3039,7 @@
       },
       "package": {
         "individually": true,
-        "artifactDirectoryName": "serverless/myserverlessproject/dev/1628557873638-2021-08-10T01:11:13.638Z"
+        "artifactDirectoryName": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z"
       },
       "custom": {
         "$ref": "$[\"service\"][\"custom\"]"
@@ -2514,7 +3056,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/myserverlessproject/dev/1628557873638-2021-08-10T01:11:13.638Z",
+    "artifactDirectoryName": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z",
     "artifact": ""
   }
 }
