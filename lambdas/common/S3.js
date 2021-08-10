@@ -37,6 +37,24 @@ const S3 = {
 
     return newData;
   },
+
+  async postImage(buffer, Key, type, bucket) {
+    const params = {
+      Body: buffer,
+      Key: Key,
+      ContentType: type,
+      Bucket: bucket,
+      ACL: "public-read",
+    };
+
+    const newImage = await s3Client.putObject(params).promise();
+
+    if (!newImage) {
+      throw Error("There was an error posting image in S3");
+    }
+
+    return newImage;
+  },
 };
 
 module.exports = S3;

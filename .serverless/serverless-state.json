@@ -12,7 +12,9 @@
       "region": "us-east-1",
       "environment": {
         "tableName": "player-points",
-        "bucketName": "taehyun-serverless-upload-bucket"
+        "bucketName": "taehyun-serverless-upload-bucket",
+        "imageUploadBucket": "taehyun-image-upload-bucket",
+        "region": "us-east-1"
       },
       "iamRoleStatements": [
         {
@@ -201,6 +203,12 @@
               "LogGroupName": "/aws/lambda/myserverlessproject-dev-sendText"
             }
           },
+          "ImageUploadLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/myserverlessproject-dev-imageUpload"
+            }
+          },
           "IamRoleLambdaExecution": {
             "Type": "AWS::IAM::Role",
             "Properties": {
@@ -288,7 +296,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z/proxy.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z/proxy.zip"
               },
               "Handler": "lambdas/endpoints/proxy.handler",
               "Runtime": "nodejs12.x",
@@ -298,7 +306,9 @@
               "Environment": {
                 "Variables": {
                   "tableName": "player-points",
-                  "bucketName": "taehyun-serverless-upload-bucket"
+                  "bucketName": "taehyun-serverless-upload-bucket",
+                  "imageUploadBucket": "taehyun-image-upload-bucket",
+                  "region": "us-east-1"
                 }
               },
               "Role": {
@@ -319,7 +329,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z/getUser.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z/getUser.zip"
               },
               "Handler": "lambdas/endpoints/getUser.handler",
               "Runtime": "nodejs12.x",
@@ -329,7 +339,9 @@
               "Environment": {
                 "Variables": {
                   "tableName": "player-points",
-                  "bucketName": "taehyun-serverless-upload-bucket"
+                  "bucketName": "taehyun-serverless-upload-bucket",
+                  "imageUploadBucket": "taehyun-image-upload-bucket",
+                  "region": "us-east-1"
                 }
               },
               "Role": {
@@ -350,7 +362,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z/getPlayerScore.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z/getPlayerScore.zip"
               },
               "Handler": "lambdas/endpoints/getPlayerScore.handler",
               "Runtime": "nodejs12.x",
@@ -360,7 +372,9 @@
               "Environment": {
                 "Variables": {
                   "tableName": "player-points",
-                  "bucketName": "taehyun-serverless-upload-bucket"
+                  "bucketName": "taehyun-serverless-upload-bucket",
+                  "imageUploadBucket": "taehyun-image-upload-bucket",
+                  "region": "us-east-1"
                 }
               },
               "Role": {
@@ -381,7 +395,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z/putPlayerScore.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z/putPlayerScore.zip"
               },
               "Handler": "lambdas/endpoints/putPlayerScore.handler",
               "Runtime": "nodejs12.x",
@@ -391,7 +405,9 @@
               "Environment": {
                 "Variables": {
                   "tableName": "player-points",
-                  "bucketName": "taehyun-serverless-upload-bucket"
+                  "bucketName": "taehyun-serverless-upload-bucket",
+                  "imageUploadBucket": "taehyun-image-upload-bucket",
+                  "region": "us-east-1"
                 }
               },
               "Role": {
@@ -412,7 +428,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z/updatePlayerScore.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z/updatePlayerScore.zip"
               },
               "Handler": "lambdas/endpoints/updatePlayerScore.handler",
               "Runtime": "nodejs12.x",
@@ -422,7 +438,9 @@
               "Environment": {
                 "Variables": {
                   "tableName": "player-points",
-                  "bucketName": "taehyun-serverless-upload-bucket"
+                  "bucketName": "taehyun-serverless-upload-bucket",
+                  "imageUploadBucket": "taehyun-image-upload-bucket",
+                  "region": "us-east-1"
                 }
               },
               "Role": {
@@ -443,7 +461,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z/createFile.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z/createFile.zip"
               },
               "Handler": "lambdas/endpoints/createFile.handler",
               "Runtime": "nodejs12.x",
@@ -453,7 +471,9 @@
               "Environment": {
                 "Variables": {
                   "tableName": "player-points",
-                  "bucketName": "taehyun-serverless-upload-bucket"
+                  "bucketName": "taehyun-serverless-upload-bucket",
+                  "imageUploadBucket": "taehyun-image-upload-bucket",
+                  "region": "us-east-1"
                 }
               },
               "Role": {
@@ -474,7 +494,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z/getFile.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z/getFile.zip"
               },
               "Handler": "lambdas/endpoints/getFile.handler",
               "Runtime": "nodejs12.x",
@@ -484,7 +504,9 @@
               "Environment": {
                 "Variables": {
                   "tableName": "player-points",
-                  "bucketName": "taehyun-serverless-upload-bucket"
+                  "bucketName": "taehyun-serverless-upload-bucket",
+                  "imageUploadBucket": "taehyun-image-upload-bucket",
+                  "region": "us-east-1"
                 }
               },
               "Role": {
@@ -505,7 +527,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z/getGameScores.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z/getGameScores.zip"
               },
               "Handler": "lambdas/endpoints/getGameScores.handler",
               "Runtime": "nodejs12.x",
@@ -515,7 +537,9 @@
               "Environment": {
                 "Variables": {
                   "tableName": "player-points",
-                  "bucketName": "taehyun-serverless-upload-bucket"
+                  "bucketName": "taehyun-serverless-upload-bucket",
+                  "imageUploadBucket": "taehyun-image-upload-bucket",
+                  "region": "us-east-1"
                 }
               },
               "Role": {
@@ -536,7 +560,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z/sendEmail.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z/sendEmail.zip"
               },
               "Handler": "lambdas/endpoints/sendEmail.handler",
               "Runtime": "nodejs12.x",
@@ -546,7 +570,9 @@
               "Environment": {
                 "Variables": {
                   "tableName": "player-points",
-                  "bucketName": "taehyun-serverless-upload-bucket"
+                  "bucketName": "taehyun-serverless-upload-bucket",
+                  "imageUploadBucket": "taehyun-image-upload-bucket",
+                  "region": "us-east-1"
                 }
               },
               "Role": {
@@ -567,7 +593,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z/sendText.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z/sendText.zip"
               },
               "Handler": "lambdas/endpoints/sendText.handler",
               "Runtime": "nodejs12.x",
@@ -577,7 +603,9 @@
               "Environment": {
                 "Variables": {
                   "tableName": "player-points",
-                  "bucketName": "taehyun-serverless-upload-bucket"
+                  "bucketName": "taehyun-serverless-upload-bucket",
+                  "imageUploadBucket": "taehyun-image-upload-bucket",
+                  "region": "us-east-1"
                 }
               },
               "Role": {
@@ -591,104 +619,147 @@
               "SendTextLogGroup"
             ]
           },
-          "ProxyLambdaVersionQyFiZ3Y8XisplUANTDOSSjYGpg2Gd3bGLNOwB8GeQ0": {
+          "ImageUploadLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z/imageUpload.zip"
+              },
+              "Handler": "lambdas/endpoints/imageUpload.handler",
+              "Runtime": "nodejs12.x",
+              "FunctionName": "myserverlessproject-dev-imageUpload",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "tableName": "player-points",
+                  "bucketName": "taehyun-serverless-upload-bucket",
+                  "imageUploadBucket": "taehyun-image-upload-bucket",
+                  "region": "us-east-1"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "ImageUploadLogGroup"
+            ]
+          },
+          "ProxyLambdaVersion688OT4fgeO3yIBHP9aQvKl1EQUD5I8qKDGkOMPPslUs": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ProxyLambdaFunction"
               },
-              "CodeSha256": "hfUJ/ysHrmON6Y/s5rrNShTNPHJpwdHhKJI36u2PkWM="
+              "CodeSha256": "aP//zVQtBuE9zqcUxJsmREQ6r9XFYbH1gSGCNwvakSU="
             }
           },
-          "GetUserLambdaVersionwVKT56WMRmlJyfmXm7DesSKfGgD8g8DddgNXYbhfvM": {
+          "GetUserLambdaVersionzVAVs27VjpXGuPxcOoFl2yL5VyvgUlhBwdmTxAYa5I": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetUserLambdaFunction"
               },
-              "CodeSha256": "dzwXXO8RABVGkDRkCZCqPMZE63jsHvrb7v1KOBnb5cQ="
+              "CodeSha256": "MqXNevU1ns15D/LcMZ0zhCrRuZKd4E7EcWfJtEMcl8M="
             }
           },
-          "SendTextLambdaVersionayvsz20RhucXEwI8hXUEaWezMgR9hHdSt12LbebL28": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "SendTextLambdaFunction"
-              },
-              "CodeSha256": "WtU9gueN/NORG2smvdbldNnY83Obuae5ev4xhzxReCM="
-            }
-          },
-          "SendEmailLambdaVersion44XOPiAB7MEQxcqt7ZhXIMQNsE4iFavI6RbrOnV3QI": {
+          "SendEmailLambdaVersion5b8IdalMnN6LsJuG79fqFPR5RaeqZBh3DcFQcRCg8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "SendEmailLambdaFunction"
               },
-              "CodeSha256": "LgB9i2uR3y0ONWly021Y3iVsFSzfsQrj4gZPI38Djpo="
+              "CodeSha256": "xLmVBzRsJCzzDUq78xnk5QmQJHfMp5lj8ctAsKAsAgo="
             }
           },
-          "CreateFileLambdaVersionp1fLjBf5wrQ1NEWDk4fnfc9UERDjCXPsHqB2egxxNM": {
+          "SendTextLambdaVersionIP1jlHJJYOVFAB9nObwRXQeo79RsUOLz8jR4PhPkq8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
-                "Ref": "CreateFileLambdaFunction"
+                "Ref": "SendTextLambdaFunction"
               },
-              "CodeSha256": "cl47lxfCP4jV9dvAxK+jaR21gKhUpgDzSUqk9yJh0qI="
+              "CodeSha256": "KAGZ7alSBP9zA9TcSd792iYNgXFsvhy1QKN9ztIXYcQ="
             }
           },
-          "GetGameScoresLambdaVersionq6K6uVGX2IOwooC58nNRwcbYnDS27In9W4gN6yNM": {
+          "ImageUploadLambdaVersionTDMdbeR5TUeGNsy6NtSZWswDrbuNIWpHRixKwX7Mmc": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
-                "Ref": "GetGameScoresLambdaFunction"
+                "Ref": "ImageUploadLambdaFunction"
               },
-              "CodeSha256": "3OcGlw6ladu8sAXD/H/lnEDNmpCXk9BT+HzoOPywnho="
+              "CodeSha256": "9AIG8iQmpjCxcKXDzSaPWL1Ts8d0Egof20pQg3SYFxw="
             }
           },
-          "GetFileLambdaVersionCN0vuqbyahdU2Uon2amTm67bcDskrPQuuWfpnWP0Sw": {
+          "GetFileLambdaVersiongDWWt71Bkqz23z9ffAlpC931FBW4Q5SOpmFcAzoVfEw": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetFileLambdaFunction"
               },
-              "CodeSha256": "gRxweICo5VV/9ysoe700KV0Ojl/+dl+c27GznSdQ1WM="
+              "CodeSha256": "GmDppnpY8+Hy9pFUvTTYV7IkLjRKaPpNenxElqgNpW4="
             }
           },
-          "GetPlayerScoreLambdaVersionLCCU8BRC41CmCHGnkcBB5p0lPzpidtprfzR3jPLAIA": {
+          "CreateFileLambdaVersion0mfmjiJoAFYwtS4rmj2SjBo63a4bn0N0HFFSXaovrs": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "CreateFileLambdaFunction"
+              },
+              "CodeSha256": "8eGKaNiFbhh9LKm08KZzqWhroto4DGMOw8OKZfNcTyA="
+            }
+          },
+          "GetPlayerScoreLambdaVersionMsbTDhtcA5j5TMOSAc2tQcMyHDQp5iEatHgT09GdWA": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetPlayerScoreLambdaFunction"
               },
-              "CodeSha256": "PwDGB+bMfPGLqBKLMbO9TLT8J3lxfRbmRGAIYpAm+Pk="
+              "CodeSha256": "bvCyB7/hckwx97wKEfk+P2u7qbyGS9vHtKCcKPy32bo="
             }
           },
-          "UpdatePlayerScoreLambdaVersionn9u7LASS9U4Gd0Gl1kgCWnZEo3n0FBTbiAlRhjXsIsE": {
+          "UpdatePlayerScoreLambdaVersion3HA5g3wRY4LR8VS5OJU1EAiyFxn0F3EpEBL4l8pwA": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "UpdatePlayerScoreLambdaFunction"
               },
-              "CodeSha256": "czRafBYAYbr2iRv8tUDyZgzN38QmCa5zHfyQub8ri4I="
+              "CodeSha256": "qvvwhxuPv1duUX4CR/LOAi6rhTGQq6J4KhVpXma1XU8="
             }
           },
-          "PutPlayerScoreLambdaVersionsiebxfd9CyqrlP7dHAGER4jj3EvUFDR0NQ4THfPqo": {
+          "PutPlayerScoreLambdaVersionHhWdfOSzOc7go9WGGc3H6AezhxUiFEUZoeZ7woP8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "PutPlayerScoreLambdaFunction"
               },
-              "CodeSha256": "yz2rI4XGX5saXSIbMB6PK1+gkclN/cdE8L7uw/R/mv4="
+              "CodeSha256": "3jYIgdGmjRv7l6t+zMJyVVT68Rkryjfhn+w6f80d7iI="
+            }
+          },
+          "GetGameScoresLambdaVersionlb2Tq8SnNfFT8ErbtTtwCNzC5CfjFYqTgVBIH7JbiU": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetGameScoresLambdaFunction"
+              },
+              "CodeSha256": "3cRBuLedOK3IhDuYMG7dOYoTKnyli3ocKF65x+NA3YU="
             }
           },
           "ApiGatewayRestApi": {
@@ -944,6 +1015,21 @@
                 ]
               },
               "PathPart": "send-text",
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayResourceImageDashupload": {
+            "Type": "AWS::ApiGateway::Resource",
+            "Properties": {
+              "ParentId": {
+                "Fn::GetAtt": [
+                  "ApiGatewayRestApi",
+                  "RootResourceId"
+                ]
+              },
+              "PathPart": "image-upload",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -1348,6 +1434,51 @@
               },
               "ResourceId": {
                 "Ref": "ApiGatewayResourceSendDashtext"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              }
+            }
+          },
+          "ApiGatewayMethodImageDashuploadOptions": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "AuthorizationType": "NONE",
+              "HttpMethod": "OPTIONS",
+              "MethodResponses": [
+                {
+                  "StatusCode": "200",
+                  "ResponseParameters": {
+                    "method.response.header.Access-Control-Allow-Origin": true,
+                    "method.response.header.Access-Control-Allow-Headers": true,
+                    "method.response.header.Access-Control-Allow-Methods": true
+                  },
+                  "ResponseModels": {}
+                }
+              ],
+              "RequestParameters": {},
+              "Integration": {
+                "Type": "MOCK",
+                "RequestTemplates": {
+                  "application/json": "{statusCode:200}"
+                },
+                "ContentHandling": "CONVERT_TO_TEXT",
+                "IntegrationResponses": [
+                  {
+                    "StatusCode": "200",
+                    "ResponseParameters": {
+                      "method.response.header.Access-Control-Allow-Origin": "'*'",
+                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
+                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
+                    },
+                    "ResponseTemplates": {
+                      "application/json": "#set($origin = $input.params(\"Origin\"))\n#if($origin == \"\") #set($origin = $input.params(\"origin\")) #end\n#if($origin.matches(\".+\")) #set($context.responseOverride.header.Access-Control-Allow-Origin = $origin) #end"
+                    }
+                  }
+                ]
+              },
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceImageDashupload"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -1800,6 +1931,52 @@
               "SendTextLambdaPermissionApiGateway"
             ]
           },
+          "ApiGatewayMethodImageDashuploadPost": {
+            "Type": "AWS::ApiGateway::Method",
+            "Properties": {
+              "HttpMethod": "POST",
+              "RequestParameters": {},
+              "ResourceId": {
+                "Ref": "ApiGatewayResourceImageDashupload"
+              },
+              "RestApiId": {
+                "Ref": "ApiGatewayRestApi"
+              },
+              "ApiKeyRequired": false,
+              "AuthorizationType": "NONE",
+              "Integration": {
+                "IntegrationHttpMethod": "POST",
+                "Type": "AWS_PROXY",
+                "Uri": {
+                  "Fn::Join": [
+                    "",
+                    [
+                      "arn:",
+                      {
+                        "Ref": "AWS::Partition"
+                      },
+                      ":apigateway:",
+                      {
+                        "Ref": "AWS::Region"
+                      },
+                      ":lambda:path/2015-03-31/functions/",
+                      {
+                        "Fn::GetAtt": [
+                          "ImageUploadLambdaFunction",
+                          "Arn"
+                        ]
+                      },
+                      "/invocations"
+                    ]
+                  ]
+                }
+              },
+              "MethodResponses": []
+            },
+            "DependsOn": [
+              "ImageUploadLambdaPermissionApiGateway"
+            ]
+          },
           "ApiGatewayMyserverlessprojectRequestValidator": {
             "Type": "AWS::ApiGateway::RequestValidator",
             "Properties": {
@@ -1811,7 +1988,7 @@
               "Name": "myserverlessproject-dev | Validate request body and querystring parameters"
             }
           },
-          "ApiGatewayDeployment1628623246729": {
+          "ApiGatewayDeployment1628626156116": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -1829,6 +2006,7 @@
               "ApiGatewayMethodGetDashgameDashscoresGameVarOptions",
               "ApiGatewayMethodSendDashemailOptions",
               "ApiGatewayMethodSendDashtextOptions",
+              "ApiGatewayMethodImageDashuploadOptions",
               "ApiGatewayMethodChuckDashnorrisProxyVarAny",
               "ApiGatewayMethodGetDashuserIdVarGet",
               "ApiGatewayMethodGetDashplayerDashscoreIdVarGet",
@@ -1838,7 +2016,8 @@
               "ApiGatewayMethodGetDashfileFilenameVarGet",
               "ApiGatewayMethodGetDashgameDashscoresGameVarGet",
               "ApiGatewayMethodSendDashemailPost",
-              "ApiGatewayMethodSendDashtextPost"
+              "ApiGatewayMethodSendDashtextPost",
+              "ApiGatewayMethodImageDashuploadPost"
             ]
           },
           "ApiGatewayApiKeyFree1": {
@@ -1855,7 +2034,7 @@
                 }
               ]
             },
-            "DependsOn": "ApiGatewayDeployment1628623246729"
+            "DependsOn": "ApiGatewayDeployment1628626156116"
           },
           "ApiGatewayApiKeyPaid1": {
             "Type": "AWS::ApiGateway::ApiKey",
@@ -1871,11 +2050,11 @@
                 }
               ]
             },
-            "DependsOn": "ApiGatewayDeployment1628623246729"
+            "DependsOn": "ApiGatewayDeployment1628626156116"
           },
           "ApiGatewayUsagePlanFree": {
             "Type": "AWS::ApiGateway::UsagePlan",
-            "DependsOn": "ApiGatewayDeployment1628623246729",
+            "DependsOn": "ApiGatewayDeployment1628626156116",
             "Properties": {
               "ApiStages": [
                 {
@@ -1899,7 +2078,7 @@
           },
           "ApiGatewayUsagePlanPaid": {
             "Type": "AWS::ApiGateway::UsagePlan",
-            "DependsOn": "ApiGatewayDeployment1628623246729",
+            "DependsOn": "ApiGatewayDeployment1628626156116",
             "Properties": {
               "ApiStages": [
                 {
@@ -2315,10 +2494,54 @@
               }
             }
           },
+          "ImageUploadLambdaPermissionApiGateway": {
+            "Type": "AWS::Lambda::Permission",
+            "Properties": {
+              "FunctionName": {
+                "Fn::GetAtt": [
+                  "ImageUploadLambdaFunction",
+                  "Arn"
+                ]
+              },
+              "Action": "lambda:InvokeFunction",
+              "Principal": "apigateway.amazonaws.com",
+              "SourceArn": {
+                "Fn::Join": [
+                  "",
+                  [
+                    "arn:",
+                    {
+                      "Ref": "AWS::Partition"
+                    },
+                    ":execute-api:",
+                    {
+                      "Ref": "AWS::Region"
+                    },
+                    ":",
+                    {
+                      "Ref": "AWS::AccountId"
+                    },
+                    ":",
+                    {
+                      "Ref": "ApiGatewayRestApi"
+                    },
+                    "/*/*"
+                  ]
+                ]
+              }
+            }
+          },
           "DemoBucketUpload": {
             "Type": "AWS::S3::Bucket",
             "Properties": {
               "BucketName": "taehyun-serverless-upload-bucket"
+            }
+          },
+          "imageUploadBucket": {
+            "Type": "AWS::S3::Bucket",
+            "Properties": {
+              "BucketName": "taehyun-image-upload-bucket",
+              "AccessControl": "PublicRead"
             }
           },
           "MyDynamoDBTable": {
@@ -2371,7 +2594,7 @@
           "ProxyLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ProxyLambdaVersionQyFiZ3Y8XisplUANTDOSSjYGpg2Gd3bGLNOwB8GeQ0"
+              "Ref": "ProxyLambdaVersion688OT4fgeO3yIBHP9aQvKl1EQUD5I8qKDGkOMPPslUs"
             },
             "Export": {
               "Name": "sls-myserverlessproject-dev-ProxyLambdaFunctionQualifiedArn"
@@ -2380,61 +2603,61 @@
           "GetUserLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetUserLambdaVersionwVKT56WMRmlJyfmXm7DesSKfGgD8g8DddgNXYbhfvM"
+              "Ref": "GetUserLambdaVersionzVAVs27VjpXGuPxcOoFl2yL5VyvgUlhBwdmTxAYa5I"
             },
             "Export": {
               "Name": "sls-myserverlessproject-dev-GetUserLambdaFunctionQualifiedArn"
             }
           },
-          "SendTextLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "SendTextLambdaVersionayvsz20RhucXEwI8hXUEaWezMgR9hHdSt12LbebL28"
-            },
-            "Export": {
-              "Name": "sls-myserverlessproject-dev-SendTextLambdaFunctionQualifiedArn"
-            }
-          },
           "SendEmailLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "SendEmailLambdaVersion44XOPiAB7MEQxcqt7ZhXIMQNsE4iFavI6RbrOnV3QI"
+              "Ref": "SendEmailLambdaVersion5b8IdalMnN6LsJuG79fqFPR5RaeqZBh3DcFQcRCg8"
             },
             "Export": {
               "Name": "sls-myserverlessproject-dev-SendEmailLambdaFunctionQualifiedArn"
             }
           },
-          "CreateFileLambdaFunctionQualifiedArn": {
+          "SendTextLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateFileLambdaVersionp1fLjBf5wrQ1NEWDk4fnfc9UERDjCXPsHqB2egxxNM"
+              "Ref": "SendTextLambdaVersionIP1jlHJJYOVFAB9nObwRXQeo79RsUOLz8jR4PhPkq8"
             },
             "Export": {
-              "Name": "sls-myserverlessproject-dev-CreateFileLambdaFunctionQualifiedArn"
+              "Name": "sls-myserverlessproject-dev-SendTextLambdaFunctionQualifiedArn"
             }
           },
-          "GetGameScoresLambdaFunctionQualifiedArn": {
+          "ImageUploadLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetGameScoresLambdaVersionq6K6uVGX2IOwooC58nNRwcbYnDS27In9W4gN6yNM"
+              "Ref": "ImageUploadLambdaVersionTDMdbeR5TUeGNsy6NtSZWswDrbuNIWpHRixKwX7Mmc"
             },
             "Export": {
-              "Name": "sls-myserverlessproject-dev-GetGameScoresLambdaFunctionQualifiedArn"
+              "Name": "sls-myserverlessproject-dev-ImageUploadLambdaFunctionQualifiedArn"
             }
           },
           "GetFileLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetFileLambdaVersionCN0vuqbyahdU2Uon2amTm67bcDskrPQuuWfpnWP0Sw"
+              "Ref": "GetFileLambdaVersiongDWWt71Bkqz23z9ffAlpC931FBW4Q5SOpmFcAzoVfEw"
             },
             "Export": {
               "Name": "sls-myserverlessproject-dev-GetFileLambdaFunctionQualifiedArn"
             }
           },
+          "CreateFileLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "CreateFileLambdaVersion0mfmjiJoAFYwtS4rmj2SjBo63a4bn0N0HFFSXaovrs"
+            },
+            "Export": {
+              "Name": "sls-myserverlessproject-dev-CreateFileLambdaFunctionQualifiedArn"
+            }
+          },
           "GetPlayerScoreLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetPlayerScoreLambdaVersionLCCU8BRC41CmCHGnkcBB5p0lPzpidtprfzR3jPLAIA"
+              "Ref": "GetPlayerScoreLambdaVersionMsbTDhtcA5j5TMOSAc2tQcMyHDQp5iEatHgT09GdWA"
             },
             "Export": {
               "Name": "sls-myserverlessproject-dev-GetPlayerScoreLambdaFunctionQualifiedArn"
@@ -2443,7 +2666,7 @@
           "UpdatePlayerScoreLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "UpdatePlayerScoreLambdaVersionn9u7LASS9U4Gd0Gl1kgCWnZEo3n0FBTbiAlRhjXsIsE"
+              "Ref": "UpdatePlayerScoreLambdaVersion3HA5g3wRY4LR8VS5OJU1EAiyFxn0F3EpEBL4l8pwA"
             },
             "Export": {
               "Name": "sls-myserverlessproject-dev-UpdatePlayerScoreLambdaFunctionQualifiedArn"
@@ -2452,10 +2675,19 @@
           "PutPlayerScoreLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "PutPlayerScoreLambdaVersionsiebxfd9CyqrlP7dHAGER4jj3EvUFDR0NQ4THfPqo"
+              "Ref": "PutPlayerScoreLambdaVersionHhWdfOSzOc7go9WGGc3H6AezhxUiFEUZoeZ7woP8"
             },
             "Export": {
               "Name": "sls-myserverlessproject-dev-PutPlayerScoreLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetGameScoresLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetGameScoresLambdaVersionlb2Tq8SnNfFT8ErbtTtwCNzC5CfjFYqTgVBIH7JbiU"
+            },
+            "Export": {
+              "Name": "sls-myserverlessproject-dev-GetGameScoresLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -2573,6 +2805,7 @@
     "custom": {
       "tableName": "player-points",
       "bucketName": "taehyun-serverless-upload-bucket",
+      "imageUploadBucket": "taehyun-image-upload-bucket",
       "s3Sync": [
         {
           "bucketName": "taehyun-serverless-upload-bucket",
@@ -2612,7 +2845,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "ProxyLambdaVersionQyFiZ3Y8XisplUANTDOSSjYGpg2Gd3bGLNOwB8GeQ0"
+        "versionLogicalId": "ProxyLambdaVersion688OT4fgeO3yIBHP9aQvKl1EQUD5I8qKDGkOMPPslUs"
       },
       "getUser": {
         "handler": "lambdas/endpoints/getUser.handler",
@@ -2653,7 +2886,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "GetUserLambdaVersionwVKT56WMRmlJyfmXm7DesSKfGgD8g8DddgNXYbhfvM"
+        "versionLogicalId": "GetUserLambdaVersionzVAVs27VjpXGuPxcOoFl2yL5VyvgUlhBwdmTxAYa5I"
       },
       "getPlayerScore": {
         "handler": "lambdas/endpoints/getPlayerScore.handler",
@@ -2693,7 +2926,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "GetPlayerScoreLambdaVersionLCCU8BRC41CmCHGnkcBB5p0lPzpidtprfzR3jPLAIA"
+        "versionLogicalId": "GetPlayerScoreLambdaVersionMsbTDhtcA5j5TMOSAc2tQcMyHDQp5iEatHgT09GdWA"
       },
       "putPlayerScore": {
         "handler": "lambdas/endpoints/putPlayerScore.handler",
@@ -2733,7 +2966,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "PutPlayerScoreLambdaVersionsiebxfd9CyqrlP7dHAGER4jj3EvUFDR0NQ4THfPqo"
+        "versionLogicalId": "PutPlayerScoreLambdaVersionHhWdfOSzOc7go9WGGc3H6AezhxUiFEUZoeZ7woP8"
       },
       "updatePlayerScore": {
         "handler": "lambdas/endpoints/updatePlayerScore.handler",
@@ -2773,7 +3006,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "UpdatePlayerScoreLambdaVersionn9u7LASS9U4Gd0Gl1kgCWnZEo3n0FBTbiAlRhjXsIsE"
+        "versionLogicalId": "UpdatePlayerScoreLambdaVersion3HA5g3wRY4LR8VS5OJU1EAiyFxn0F3EpEBL4l8pwA"
       },
       "createFile": {
         "handler": "lambdas/endpoints/createFile.handler",
@@ -2813,7 +3046,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "CreateFileLambdaVersionp1fLjBf5wrQ1NEWDk4fnfc9UERDjCXPsHqB2egxxNM"
+        "versionLogicalId": "CreateFileLambdaVersion0mfmjiJoAFYwtS4rmj2SjBo63a4bn0N0HFFSXaovrs"
       },
       "getFile": {
         "handler": "lambdas/endpoints/getFile.handler",
@@ -2853,7 +3086,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "GetFileLambdaVersionCN0vuqbyahdU2Uon2amTm67bcDskrPQuuWfpnWP0Sw"
+        "versionLogicalId": "GetFileLambdaVersiongDWWt71Bkqz23z9ffAlpC931FBW4Q5SOpmFcAzoVfEw"
       },
       "getGameScores": {
         "handler": "lambdas/endpoints/getGameScores.handler",
@@ -2893,7 +3126,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "GetGameScoresLambdaVersionq6K6uVGX2IOwooC58nNRwcbYnDS27In9W4gN6yNM"
+        "versionLogicalId": "GetGameScoresLambdaVersionlb2Tq8SnNfFT8ErbtTtwCNzC5CfjFYqTgVBIH7JbiU"
       },
       "sendEmail": {
         "handler": "lambdas/endpoints/sendEmail.handler",
@@ -2933,7 +3166,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "SendEmailLambdaVersion44XOPiAB7MEQxcqt7ZhXIMQNsE4iFavI6RbrOnV3QI"
+        "versionLogicalId": "SendEmailLambdaVersion5b8IdalMnN6LsJuG79fqFPR5RaeqZBh3DcFQcRCg8"
       },
       "sendText": {
         "handler": "lambdas/endpoints/sendText.handler",
@@ -2973,7 +3206,47 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "SendTextLambdaVersionayvsz20RhucXEwI8hXUEaWezMgR9hHdSt12LbebL28"
+        "versionLogicalId": "SendTextLambdaVersionIP1jlHJJYOVFAB9nObwRXQeo79RsUOLz8jR4PhPkq8"
+      },
+      "imageUpload": {
+        "handler": "lambdas/endpoints/imageUpload.handler",
+        "events": [
+          {
+            "http": {
+              "path": "image-upload",
+              "method": "post",
+              "cors": {
+                "origins": [
+                  "*"
+                ],
+                "origin": "*",
+                "methods": [
+                  "OPTIONS",
+                  "POST"
+                ],
+                "headers": [
+                  "Content-Type",
+                  "X-Amz-Date",
+                  "Authorization",
+                  "X-Api-Key",
+                  "X-Amz-Security-Token",
+                  "X-Amz-User-Agent"
+                ],
+                "allowCredentials": false
+              },
+              "integration": "AWS_PROXY"
+            }
+          }
+        ],
+        "name": "myserverlessproject-dev-imageUpload",
+        "package": {
+          "artifact": ".serverless\\imageUpload.zip"
+        },
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs12.x",
+        "vpc": {},
+        "versionLogicalId": "ImageUploadLambdaVersionTDMdbeR5TUeGNsy6NtSZWswDrbuNIWpHRixKwX7Mmc"
       }
     },
     "resources": {
@@ -2982,6 +3255,13 @@
           "Type": "AWS::S3::Bucket",
           "Properties": {
             "BucketName": "taehyun-serverless-upload-bucket"
+          }
+        },
+        "imageUploadBucket": {
+          "Type": "AWS::S3::Bucket",
+          "Properties": {
+            "BucketName": "taehyun-image-upload-bucket",
+            "AccessControl": "PublicRead"
           }
         },
         "MyDynamoDBTable": {
@@ -3039,7 +3319,7 @@
       },
       "package": {
         "individually": true,
-        "artifactDirectoryName": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z"
+        "artifactDirectoryName": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z"
       },
       "custom": {
         "$ref": "$[\"service\"][\"custom\"]"
@@ -3056,7 +3336,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/myserverlessproject/dev/1628623284155-2021-08-10T19:21:24.155Z",
+    "artifactDirectoryName": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z",
     "artifact": ""
   }
 }
