@@ -34,7 +34,7 @@ exports.handler = async (event) => {
     }
 
     const name = uuid();
-    const key = `${name}.${detectedExt}`;
+    const key = `uploads/${name}.${detectedExt}`;
 
     console.log(`writing image to bucket called ${key}`);
 
@@ -48,7 +48,7 @@ exports.handler = async (event) => {
       })
       .promise();
 
-    const url = `https://${process.env.imageUploadBucket}.s3-${process.env.region}.amazonaws.com/${key}`;
+    const url = `https://${process.env.imageUploadBucket}.s3.amazonaws.com/${key}`;
     return Responses._200({
       imageURL: url,
     });

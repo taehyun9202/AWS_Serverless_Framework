@@ -22,38 +22,23 @@ const S3 = {
     return data;
   },
 
-  async put(data, fileName, bucket) {
+  async put(data, fileName, bucket, ACL, ContentType) {
     const params = {
       Bucket: bucket,
-      Body: JSON.stringify(data),
+      Body: Buffer.isBuffer(data) ? data : JSON.stringify(data),
       Key: fileName,
+      ACL,
+      ContentType,
     };
+    console.log("params", params);
 
     const newData = await s3Client.putObject(params).promise();
 
     if (!newData) {
-      throw Error("There was an error creatig file in S3");
+      throw Error("there was an error writing the file");
     }
 
     return newData;
-  },
-
-  async postImage(buffer, Key, type, bucket) {
-    const params = {
-      Body: buffer,
-      Key: Key,
-      ContentType: type,
-      Bucket: bucket,
-      ACL: "public-read",
-    };
-
-    const newImage = await s3Client.putObject(params).promise();
-
-    if (!newImage) {
-      throw Error("There was an error posting image in S3");
-    }
-
-    return newImage;
   },
 };
 

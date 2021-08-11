@@ -209,6 +209,12 @@
               "LogGroupName": "/aws/lambda/myserverlessproject-dev-imageUpload"
             }
           },
+          "ImageResizeLogGroup": {
+            "Type": "AWS::Logs::LogGroup",
+            "Properties": {
+              "LogGroupName": "/aws/lambda/myserverlessproject-dev-imageResize"
+            }
+          },
           "IamRoleLambdaExecution": {
             "Type": "AWS::IAM::Role",
             "Properties": {
@@ -296,7 +302,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z/proxy.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628643217937-2021-08-11T00:53:37.937Z/proxy.zip"
               },
               "Handler": "lambdas/endpoints/proxy.handler",
               "Runtime": "nodejs12.x",
@@ -329,7 +335,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z/getUser.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628643217937-2021-08-11T00:53:37.937Z/getUser.zip"
               },
               "Handler": "lambdas/endpoints/getUser.handler",
               "Runtime": "nodejs12.x",
@@ -362,7 +368,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z/getPlayerScore.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628643217937-2021-08-11T00:53:37.937Z/getPlayerScore.zip"
               },
               "Handler": "lambdas/endpoints/getPlayerScore.handler",
               "Runtime": "nodejs12.x",
@@ -395,7 +401,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z/putPlayerScore.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628643217937-2021-08-11T00:53:37.937Z/putPlayerScore.zip"
               },
               "Handler": "lambdas/endpoints/putPlayerScore.handler",
               "Runtime": "nodejs12.x",
@@ -428,7 +434,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z/updatePlayerScore.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628643217937-2021-08-11T00:53:37.937Z/updatePlayerScore.zip"
               },
               "Handler": "lambdas/endpoints/updatePlayerScore.handler",
               "Runtime": "nodejs12.x",
@@ -461,7 +467,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z/createFile.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628643217937-2021-08-11T00:53:37.937Z/createFile.zip"
               },
               "Handler": "lambdas/endpoints/createFile.handler",
               "Runtime": "nodejs12.x",
@@ -494,7 +500,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z/getFile.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628643217937-2021-08-11T00:53:37.937Z/getFile.zip"
               },
               "Handler": "lambdas/endpoints/getFile.handler",
               "Runtime": "nodejs12.x",
@@ -527,7 +533,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z/getGameScores.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628643217937-2021-08-11T00:53:37.937Z/getGameScores.zip"
               },
               "Handler": "lambdas/endpoints/getGameScores.handler",
               "Runtime": "nodejs12.x",
@@ -560,7 +566,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z/sendEmail.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628643217937-2021-08-11T00:53:37.937Z/sendEmail.zip"
               },
               "Handler": "lambdas/endpoints/sendEmail.handler",
               "Runtime": "nodejs12.x",
@@ -593,7 +599,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z/sendText.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628643217937-2021-08-11T00:53:37.937Z/sendText.zip"
               },
               "Handler": "lambdas/endpoints/sendText.handler",
               "Runtime": "nodejs12.x",
@@ -626,7 +632,7 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z/imageUpload.zip"
+                "S3Key": "serverless/myserverlessproject/dev/1628643217937-2021-08-11T00:53:37.937Z/imageUpload.zip"
               },
               "Handler": "lambdas/endpoints/imageUpload.handler",
               "Runtime": "nodejs12.x",
@@ -652,115 +658,300 @@
               "ImageUploadLogGroup"
             ]
           },
-          "ProxyLambdaVersion688OT4fgeO3yIBHP9aQvKl1EQUD5I8qKDGkOMPPslUs": {
+          "ImageResizeLambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/myserverlessproject/dev/1628643217937-2021-08-11T00:53:37.937Z/imageResize.zip"
+              },
+              "Handler": "lambdas/endpoints/imageResize.handler",
+              "Runtime": "nodejs12.x",
+              "FunctionName": "myserverlessproject-dev-imageResize",
+              "MemorySize": 1024,
+              "Timeout": 6,
+              "Environment": {
+                "Variables": {
+                  "tableName": "player-points",
+                  "bucketName": "taehyun-serverless-upload-bucket",
+                  "imageUploadBucket": "taehyun-image-upload-bucket",
+                  "region": "us-east-1"
+                }
+              },
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "ImageResizeLogGroup"
+            ]
+          },
+          "ProxyLambdaVersionCrHpqVUT2xgNZhPx1vPdd59Fq6xafw4XZs1uhqaLY": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ProxyLambdaFunction"
               },
-              "CodeSha256": "aP//zVQtBuE9zqcUxJsmREQ6r9XFYbH1gSGCNwvakSU="
+              "CodeSha256": "HD0dfW0M3sVqmyLYD7GU2rE+zxNcskIADoNSeDfYBIQ="
             }
           },
-          "GetUserLambdaVersionzVAVs27VjpXGuPxcOoFl2yL5VyvgUlhBwdmTxAYa5I": {
+          "GetUserLambdaVersionliEHoQcY0z5dPxP0e5rplgoOymVZLeKah5emuKVU5c": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetUserLambdaFunction"
               },
-              "CodeSha256": "MqXNevU1ns15D/LcMZ0zhCrRuZKd4E7EcWfJtEMcl8M="
+              "CodeSha256": "Nkn0GG0baonv+mrjoVLqZLZ6o7p25aBZwf6MIFYAq/o="
             }
           },
-          "SendEmailLambdaVersion5b8IdalMnN6LsJuG79fqFPR5RaeqZBh3DcFQcRCg8": {
+          "SendEmailLambdaVersionzqNFYT0vdsgNpp6zVBBLfX3QOQ5M6SacRuFfht33J1c": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "SendEmailLambdaFunction"
               },
-              "CodeSha256": "xLmVBzRsJCzzDUq78xnk5QmQJHfMp5lj8ctAsKAsAgo="
+              "CodeSha256": "YhTBKpuVYdrAA51Z0j/4ThYjhL/LtEXygzTnoXUpq2w="
             }
           },
-          "SendTextLambdaVersionIP1jlHJJYOVFAB9nObwRXQeo79RsUOLz8jR4PhPkq8": {
+          "SendTextLambdaVersionv9o53A4JpaKgM7lhedPmmAtzvab5ppOEaP9B9FmouqU": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "SendTextLambdaFunction"
               },
-              "CodeSha256": "KAGZ7alSBP9zA9TcSd792iYNgXFsvhy1QKN9ztIXYcQ="
+              "CodeSha256": "PlqaGyEmNwz7C8uHnYlD0Xyin+/p2S3+nLGCd/Q5EZA="
             }
           },
-          "ImageUploadLambdaVersionTDMdbeR5TUeGNsy6NtSZWswDrbuNIWpHRixKwX7Mmc": {
+          "ImageUploadLambdaVersionsDn24OIvfm4YzCaEK0KwMEwxPvbLPWkVBB4eHpf5jE": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ImageUploadLambdaFunction"
               },
-              "CodeSha256": "9AIG8iQmpjCxcKXDzSaPWL1Ts8d0Egof20pQg3SYFxw="
+              "CodeSha256": "F7prlPY5vnsDgm+bjiMOpCUAQv5z/Idcigqn11b08vY="
             }
           },
-          "GetFileLambdaVersiongDWWt71Bkqz23z9ffAlpC931FBW4Q5SOpmFcAzoVfEw": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "GetFileLambdaFunction"
-              },
-              "CodeSha256": "GmDppnpY8+Hy9pFUvTTYV7IkLjRKaPpNenxElqgNpW4="
-            }
-          },
-          "CreateFileLambdaVersion0mfmjiJoAFYwtS4rmj2SjBo63a4bn0N0HFFSXaovrs": {
+          "CreateFileLambdaVersionIFSioKPE1QCYT9UJxPNwk5rIKCqcfgQf8xl5WWHPvmA": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateFileLambdaFunction"
               },
-              "CodeSha256": "8eGKaNiFbhh9LKm08KZzqWhroto4DGMOw8OKZfNcTyA="
+              "CodeSha256": "GJIc0EgXMJJuLgEDuaXe+9UlhZ4VA8CQ2GBTOMj0x3g="
             }
           },
-          "GetPlayerScoreLambdaVersionMsbTDhtcA5j5TMOSAc2tQcMyHDQp5iEatHgT09GdWA": {
+          "GetFileLambdaVersion2QxrsBYfAiM5I2kjTNi8153kU5sKcwdb4i4qHEZrHI": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
-                "Ref": "GetPlayerScoreLambdaFunction"
+                "Ref": "GetFileLambdaFunction"
               },
-              "CodeSha256": "bvCyB7/hckwx97wKEfk+P2u7qbyGS9vHtKCcKPy32bo="
+              "CodeSha256": "99V3D0NknT1MaDjJOp4ydqheuhQn5ySxVJmHN3kFZWg="
             }
           },
-          "UpdatePlayerScoreLambdaVersion3HA5g3wRY4LR8VS5OJU1EAiyFxn0F3EpEBL4l8pwA": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "UpdatePlayerScoreLambdaFunction"
-              },
-              "CodeSha256": "qvvwhxuPv1duUX4CR/LOAi6rhTGQq6J4KhVpXma1XU8="
-            }
-          },
-          "PutPlayerScoreLambdaVersionHhWdfOSzOc7go9WGGc3H6AezhxUiFEUZoeZ7woP8": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "PutPlayerScoreLambdaFunction"
-              },
-              "CodeSha256": "3jYIgdGmjRv7l6t+zMJyVVT68Rkryjfhn+w6f80d7iI="
-            }
-          },
-          "GetGameScoresLambdaVersionlb2Tq8SnNfFT8ErbtTtwCNzC5CfjFYqTgVBIH7JbiU": {
+          "GetGameScoresLambdaVersionAq9aOEn5SKAx2VnPG5CUfME9009V2ttdsobkmgl8Ac": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "GetGameScoresLambdaFunction"
               },
-              "CodeSha256": "3cRBuLedOK3IhDuYMG7dOYoTKnyli3ocKF65x+NA3YU="
+              "CodeSha256": "B9McSiKAda6h6W3gaYDD8HCH5e5TAKCCTpSBdmsZ1RI="
             }
+          },
+          "GetPlayerScoreLambdaVersionBQEybdClptSlk9N01Yd1pUbwGYthBsi2BvNp1XHfw": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "GetPlayerScoreLambdaFunction"
+              },
+              "CodeSha256": "SOVNICRD1HpGpym0Jpn2LNGwbZ1snSJAE93hmhccCDo="
+            }
+          },
+          "PutPlayerScoreLambdaVersion4OFpNQntkgDxZhCLMfvlbahpAUQyuDzNBWD9rCi1IB8": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "PutPlayerScoreLambdaFunction"
+              },
+              "CodeSha256": "0fKhZ0QIZB1T0aJwXopFYJuB6EvQWNpLBXoTICiFrdo="
+            }
+          },
+          "UpdatePlayerScoreLambdaVersionXsJWxBUT46aXi3fp1fDzjpkM69uJwrdCAouVpiQDU": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "UpdatePlayerScoreLambdaFunction"
+              },
+              "CodeSha256": "9wzVEW6UA15kr2huPS2d0bqBE0DcJ2EH7Gr7ccXQ1nw="
+            }
+          },
+          "ImageResizeLambdaVersionhTMR7pos0ZwhPEfzNBYD9IUOCHg8ExCJj2HqVpxn4": {
+            "Type": "AWS::Lambda::Version",
+            "DeletionPolicy": "Retain",
+            "Properties": {
+              "FunctionName": {
+                "Ref": "ImageResizeLambdaFunction"
+              },
+              "CodeSha256": "bmHQAVm2N7b2XMq8ZWINaKWeaLcLdBB4c4+86tW/Xms="
+            }
+          },
+          "ImageResizeCustomS31": {
+            "Type": "Custom::S3",
+            "Version": 1,
+            "DependsOn": [
+              "ImageResizeLambdaFunction",
+              "CustomDashresourceDashexistingDashs3LambdaFunction"
+            ],
+            "Properties": {
+              "ServiceToken": {
+                "Fn::GetAtt": [
+                  "CustomDashresourceDashexistingDashs3LambdaFunction",
+                  "Arn"
+                ]
+              },
+              "FunctionName": "myserverlessproject-dev-imageResize",
+              "BucketName": "taehyun-image-upload-bucket",
+              "BucketConfigs": [
+                {
+                  "Event": "s3:ObjectCreated:*",
+                  "Rules": [
+                    {
+                      "Prefix": "uploads/"
+                    }
+                  ]
+                }
+              ]
+            }
+          },
+          "IamRoleCustomResourcesLambdaExecution": {
+            "Type": "AWS::IAM::Role",
+            "Properties": {
+              "AssumeRolePolicyDocument": {
+                "Version": "2012-10-17",
+                "Statement": [
+                  {
+                    "Effect": "Allow",
+                    "Principal": {
+                      "Service": [
+                        "lambda.amazonaws.com"
+                      ]
+                    },
+                    "Action": [
+                      "sts:AssumeRole"
+                    ]
+                  }
+                ]
+              },
+              "Policies": [
+                {
+                  "PolicyName": {
+                    "Fn::Join": [
+                      "-",
+                      [
+                        "dev",
+                        "myserverlessproject",
+                        "custom-resources-lambda"
+                      ]
+                    ]
+                  },
+                  "PolicyDocument": {
+                    "Version": "2012-10-17",
+                    "Statement": [
+                      {
+                        "Effect": "Allow",
+                        "Resource": {
+                          "Fn::Join": [
+                            ":",
+                            [
+                              "arn",
+                              {
+                                "Ref": "AWS::Partition"
+                              },
+                              "s3",
+                              "",
+                              "",
+                              "taehyun-image-upload-bucket"
+                            ]
+                          ]
+                        },
+                        "Action": [
+                          "s3:PutBucketNotification",
+                          "s3:GetBucketNotification"
+                        ]
+                      },
+                      {
+                        "Effect": "Allow",
+                        "Resource": {
+                          "Fn::Join": [
+                            ":",
+                            [
+                              "arn",
+                              {
+                                "Ref": "AWS::Partition"
+                              },
+                              "lambda",
+                              {
+                                "Ref": "AWS::Region"
+                              },
+                              {
+                                "Ref": "AWS::AccountId"
+                              },
+                              "function",
+                              "*"
+                            ]
+                          ]
+                        },
+                        "Action": [
+                          "lambda:AddPermission",
+                          "lambda:RemovePermission"
+                        ]
+                      }
+                    ]
+                  }
+                }
+              ]
+            }
+          },
+          "CustomDashresourceDashexistingDashs3LambdaFunction": {
+            "Type": "AWS::Lambda::Function",
+            "Properties": {
+              "Code": {
+                "S3Bucket": {
+                  "Ref": "ServerlessDeploymentBucket"
+                },
+                "S3Key": "serverless/myserverlessproject/dev/1628643217937-2021-08-11T00:53:37.937Z/custom-resources.zip"
+              },
+              "FunctionName": "myserverlessproject-dev-custom-resource-existing-s3",
+              "Handler": "s3/handler.handler",
+              "MemorySize": 1024,
+              "Runtime": "nodejs12.x",
+              "Timeout": 180,
+              "Role": {
+                "Fn::GetAtt": [
+                  "IamRoleCustomResourcesLambdaExecution",
+                  "Arn"
+                ]
+              }
+            },
+            "DependsOn": [
+              "IamRoleCustomResourcesLambdaExecution"
+            ]
           },
           "ApiGatewayRestApi": {
             "Type": "AWS::ApiGateway::RestApi",
@@ -1988,7 +2179,7 @@
               "Name": "myserverlessproject-dev | Validate request body and querystring parameters"
             }
           },
-          "ApiGatewayDeployment1628626156116": {
+          "ApiGatewayDeployment1628643172037": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
@@ -2034,7 +2225,7 @@
                 }
               ]
             },
-            "DependsOn": "ApiGatewayDeployment1628626156116"
+            "DependsOn": "ApiGatewayDeployment1628643172037"
           },
           "ApiGatewayApiKeyPaid1": {
             "Type": "AWS::ApiGateway::ApiKey",
@@ -2050,11 +2241,11 @@
                 }
               ]
             },
-            "DependsOn": "ApiGatewayDeployment1628626156116"
+            "DependsOn": "ApiGatewayDeployment1628643172037"
           },
           "ApiGatewayUsagePlanFree": {
             "Type": "AWS::ApiGateway::UsagePlan",
-            "DependsOn": "ApiGatewayDeployment1628626156116",
+            "DependsOn": "ApiGatewayDeployment1628643172037",
             "Properties": {
               "ApiStages": [
                 {
@@ -2078,7 +2269,7 @@
           },
           "ApiGatewayUsagePlanPaid": {
             "Type": "AWS::ApiGateway::UsagePlan",
-            "DependsOn": "ApiGatewayDeployment1628626156116",
+            "DependsOn": "ApiGatewayDeployment1628643172037",
             "Properties": {
               "ApiStages": [
                 {
@@ -2594,7 +2785,7 @@
           "ProxyLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ProxyLambdaVersion688OT4fgeO3yIBHP9aQvKl1EQUD5I8qKDGkOMPPslUs"
+              "Ref": "ProxyLambdaVersionCrHpqVUT2xgNZhPx1vPdd59Fq6xafw4XZs1uhqaLY"
             },
             "Export": {
               "Name": "sls-myserverlessproject-dev-ProxyLambdaFunctionQualifiedArn"
@@ -2603,7 +2794,7 @@
           "GetUserLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetUserLambdaVersionzVAVs27VjpXGuPxcOoFl2yL5VyvgUlhBwdmTxAYa5I"
+              "Ref": "GetUserLambdaVersionliEHoQcY0z5dPxP0e5rplgoOymVZLeKah5emuKVU5c"
             },
             "Export": {
               "Name": "sls-myserverlessproject-dev-GetUserLambdaFunctionQualifiedArn"
@@ -2612,7 +2803,7 @@
           "SendEmailLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "SendEmailLambdaVersion5b8IdalMnN6LsJuG79fqFPR5RaeqZBh3DcFQcRCg8"
+              "Ref": "SendEmailLambdaVersionzqNFYT0vdsgNpp6zVBBLfX3QOQ5M6SacRuFfht33J1c"
             },
             "Export": {
               "Name": "sls-myserverlessproject-dev-SendEmailLambdaFunctionQualifiedArn"
@@ -2621,7 +2812,7 @@
           "SendTextLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "SendTextLambdaVersionIP1jlHJJYOVFAB9nObwRXQeo79RsUOLz8jR4PhPkq8"
+              "Ref": "SendTextLambdaVersionv9o53A4JpaKgM7lhedPmmAtzvab5ppOEaP9B9FmouqU"
             },
             "Export": {
               "Name": "sls-myserverlessproject-dev-SendTextLambdaFunctionQualifiedArn"
@@ -2630,64 +2821,73 @@
           "ImageUploadLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ImageUploadLambdaVersionTDMdbeR5TUeGNsy6NtSZWswDrbuNIWpHRixKwX7Mmc"
+              "Ref": "ImageUploadLambdaVersionsDn24OIvfm4YzCaEK0KwMEwxPvbLPWkVBB4eHpf5jE"
             },
             "Export": {
               "Name": "sls-myserverlessproject-dev-ImageUploadLambdaFunctionQualifiedArn"
             }
           },
-          "GetFileLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "GetFileLambdaVersiongDWWt71Bkqz23z9ffAlpC931FBW4Q5SOpmFcAzoVfEw"
-            },
-            "Export": {
-              "Name": "sls-myserverlessproject-dev-GetFileLambdaFunctionQualifiedArn"
-            }
-          },
           "CreateFileLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateFileLambdaVersion0mfmjiJoAFYwtS4rmj2SjBo63a4bn0N0HFFSXaovrs"
+              "Ref": "CreateFileLambdaVersionIFSioKPE1QCYT9UJxPNwk5rIKCqcfgQf8xl5WWHPvmA"
             },
             "Export": {
               "Name": "sls-myserverlessproject-dev-CreateFileLambdaFunctionQualifiedArn"
             }
           },
-          "GetPlayerScoreLambdaFunctionQualifiedArn": {
+          "GetFileLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetPlayerScoreLambdaVersionMsbTDhtcA5j5TMOSAc2tQcMyHDQp5iEatHgT09GdWA"
+              "Ref": "GetFileLambdaVersion2QxrsBYfAiM5I2kjTNi8153kU5sKcwdb4i4qHEZrHI"
             },
             "Export": {
-              "Name": "sls-myserverlessproject-dev-GetPlayerScoreLambdaFunctionQualifiedArn"
-            }
-          },
-          "UpdatePlayerScoreLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "UpdatePlayerScoreLambdaVersion3HA5g3wRY4LR8VS5OJU1EAiyFxn0F3EpEBL4l8pwA"
-            },
-            "Export": {
-              "Name": "sls-myserverlessproject-dev-UpdatePlayerScoreLambdaFunctionQualifiedArn"
-            }
-          },
-          "PutPlayerScoreLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "PutPlayerScoreLambdaVersionHhWdfOSzOc7go9WGGc3H6AezhxUiFEUZoeZ7woP8"
-            },
-            "Export": {
-              "Name": "sls-myserverlessproject-dev-PutPlayerScoreLambdaFunctionQualifiedArn"
+              "Name": "sls-myserverlessproject-dev-GetFileLambdaFunctionQualifiedArn"
             }
           },
           "GetGameScoresLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "GetGameScoresLambdaVersionlb2Tq8SnNfFT8ErbtTtwCNzC5CfjFYqTgVBIH7JbiU"
+              "Ref": "GetGameScoresLambdaVersionAq9aOEn5SKAx2VnPG5CUfME9009V2ttdsobkmgl8Ac"
             },
             "Export": {
               "Name": "sls-myserverlessproject-dev-GetGameScoresLambdaFunctionQualifiedArn"
+            }
+          },
+          "GetPlayerScoreLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "GetPlayerScoreLambdaVersionBQEybdClptSlk9N01Yd1pUbwGYthBsi2BvNp1XHfw"
+            },
+            "Export": {
+              "Name": "sls-myserverlessproject-dev-GetPlayerScoreLambdaFunctionQualifiedArn"
+            }
+          },
+          "PutPlayerScoreLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "PutPlayerScoreLambdaVersion4OFpNQntkgDxZhCLMfvlbahpAUQyuDzNBWD9rCi1IB8"
+            },
+            "Export": {
+              "Name": "sls-myserverlessproject-dev-PutPlayerScoreLambdaFunctionQualifiedArn"
+            }
+          },
+          "UpdatePlayerScoreLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "UpdatePlayerScoreLambdaVersionXsJWxBUT46aXi3fp1fDzjpkM69uJwrdCAouVpiQDU"
+            },
+            "Export": {
+              "Name": "sls-myserverlessproject-dev-UpdatePlayerScoreLambdaFunctionQualifiedArn"
+            }
+          },
+          "ImageResizeLambdaFunctionQualifiedArn": {
+            "Description": "Current Lambda function version",
+            "Value": {
+              "Ref": "ImageResizeLambdaVersionhTMR7pos0ZwhPEfzNBYD9IUOCHg8ExCJj2HqVpxn4"
+            },
+            "Export": {
+              "Name": "sls-myserverlessproject-dev-ImageResizeLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -2845,7 +3045,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "ProxyLambdaVersion688OT4fgeO3yIBHP9aQvKl1EQUD5I8qKDGkOMPPslUs"
+        "versionLogicalId": "ProxyLambdaVersionCrHpqVUT2xgNZhPx1vPdd59Fq6xafw4XZs1uhqaLY"
       },
       "getUser": {
         "handler": "lambdas/endpoints/getUser.handler",
@@ -2886,7 +3086,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "GetUserLambdaVersionzVAVs27VjpXGuPxcOoFl2yL5VyvgUlhBwdmTxAYa5I"
+        "versionLogicalId": "GetUserLambdaVersionliEHoQcY0z5dPxP0e5rplgoOymVZLeKah5emuKVU5c"
       },
       "getPlayerScore": {
         "handler": "lambdas/endpoints/getPlayerScore.handler",
@@ -2926,7 +3126,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "GetPlayerScoreLambdaVersionMsbTDhtcA5j5TMOSAc2tQcMyHDQp5iEatHgT09GdWA"
+        "versionLogicalId": "GetPlayerScoreLambdaVersionBQEybdClptSlk9N01Yd1pUbwGYthBsi2BvNp1XHfw"
       },
       "putPlayerScore": {
         "handler": "lambdas/endpoints/putPlayerScore.handler",
@@ -2966,7 +3166,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "PutPlayerScoreLambdaVersionHhWdfOSzOc7go9WGGc3H6AezhxUiFEUZoeZ7woP8"
+        "versionLogicalId": "PutPlayerScoreLambdaVersion4OFpNQntkgDxZhCLMfvlbahpAUQyuDzNBWD9rCi1IB8"
       },
       "updatePlayerScore": {
         "handler": "lambdas/endpoints/updatePlayerScore.handler",
@@ -3006,7 +3206,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "UpdatePlayerScoreLambdaVersion3HA5g3wRY4LR8VS5OJU1EAiyFxn0F3EpEBL4l8pwA"
+        "versionLogicalId": "UpdatePlayerScoreLambdaVersionXsJWxBUT46aXi3fp1fDzjpkM69uJwrdCAouVpiQDU"
       },
       "createFile": {
         "handler": "lambdas/endpoints/createFile.handler",
@@ -3046,7 +3246,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "CreateFileLambdaVersion0mfmjiJoAFYwtS4rmj2SjBo63a4bn0N0HFFSXaovrs"
+        "versionLogicalId": "CreateFileLambdaVersionIFSioKPE1QCYT9UJxPNwk5rIKCqcfgQf8xl5WWHPvmA"
       },
       "getFile": {
         "handler": "lambdas/endpoints/getFile.handler",
@@ -3086,7 +3286,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "GetFileLambdaVersiongDWWt71Bkqz23z9ffAlpC931FBW4Q5SOpmFcAzoVfEw"
+        "versionLogicalId": "GetFileLambdaVersion2QxrsBYfAiM5I2kjTNi8153kU5sKcwdb4i4qHEZrHI"
       },
       "getGameScores": {
         "handler": "lambdas/endpoints/getGameScores.handler",
@@ -3126,7 +3326,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "GetGameScoresLambdaVersionlb2Tq8SnNfFT8ErbtTtwCNzC5CfjFYqTgVBIH7JbiU"
+        "versionLogicalId": "GetGameScoresLambdaVersionAq9aOEn5SKAx2VnPG5CUfME9009V2ttdsobkmgl8Ac"
       },
       "sendEmail": {
         "handler": "lambdas/endpoints/sendEmail.handler",
@@ -3166,7 +3366,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "SendEmailLambdaVersion5b8IdalMnN6LsJuG79fqFPR5RaeqZBh3DcFQcRCg8"
+        "versionLogicalId": "SendEmailLambdaVersionzqNFYT0vdsgNpp6zVBBLfX3QOQ5M6SacRuFfht33J1c"
       },
       "sendText": {
         "handler": "lambdas/endpoints/sendText.handler",
@@ -3206,7 +3406,7 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "SendTextLambdaVersionIP1jlHJJYOVFAB9nObwRXQeo79RsUOLz8jR4PhPkq8"
+        "versionLogicalId": "SendTextLambdaVersionv9o53A4JpaKgM7lhedPmmAtzvab5ppOEaP9B9FmouqU"
       },
       "imageUpload": {
         "handler": "lambdas/endpoints/imageUpload.handler",
@@ -3246,7 +3446,33 @@
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "ImageUploadLambdaVersionTDMdbeR5TUeGNsy6NtSZWswDrbuNIWpHRixKwX7Mmc"
+        "versionLogicalId": "ImageUploadLambdaVersionsDn24OIvfm4YzCaEK0KwMEwxPvbLPWkVBB4eHpf5jE"
+      },
+      "imageResize": {
+        "handler": "lambdas/endpoints/imageResize.handler",
+        "events": [
+          {
+            "s3": {
+              "bucket": "taehyun-image-upload-bucket",
+              "event": "s3:ObjectCreated:*",
+              "rules": [
+                {
+                  "prefix": "uploads/"
+                }
+              ],
+              "existing": true
+            }
+          }
+        ],
+        "name": "myserverlessproject-dev-imageResize",
+        "package": {
+          "artifact": ".serverless\\imageResize.zip"
+        },
+        "memory": 1024,
+        "timeout": 6,
+        "runtime": "nodejs12.x",
+        "vpc": {},
+        "versionLogicalId": "ImageResizeLambdaVersionhTMR7pos0ZwhPEfzNBYD9IUOCHg8ExCJj2HqVpxn4"
       }
     },
     "resources": {
@@ -3319,7 +3545,7 @@
       },
       "package": {
         "individually": true,
-        "artifactDirectoryName": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z"
+        "artifactDirectoryName": "serverless/myserverlessproject/dev/1628643217937-2021-08-11T00:53:37.937Z"
       },
       "custom": {
         "$ref": "$[\"service\"][\"custom\"]"
@@ -3336,7 +3562,7 @@
   },
   "package": {
     "individually": true,
-    "artifactDirectoryName": "serverless/myserverlessproject/dev/1628626193417-2021-08-10T20:09:53.417Z",
+    "artifactDirectoryName": "serverless/myserverlessproject/dev/1628643217937-2021-08-11T00:53:37.937Z",
     "artifact": ""
   }
 }
